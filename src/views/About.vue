@@ -41,7 +41,7 @@
           <div v-for="(entry, index) in timelineEntries" 
                :key="index" 
                class="timeline-entry"
-               :class="{ 'right': index % 2 === 0, 'current': entry.title === $t('about.journey.current.title') }"
+               :class="{ 'right': index % 2 === 0, 'current': index === 0 }"
                @click="showTimelineDetails(entry)">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 interface Skill {
@@ -108,65 +108,69 @@ export default defineComponent({
           description: 'Figma, Adobe XD, Responsive Design'
         }
       ] as Skill[],
-      timelineEntries: [
+      selectedEntry: null as TimelineEntry | null
+    }
+  },
+  computed: {
+    timelineEntries(): TimelineEntry[] {
+      return [
         {
-          title: this.t('about.journey.current.title'),
-          date: this.t('about.journey.current.date'),
-          shortDescription: this.t('about.journey.current.shortDescription'),
+          title: this.$t('about.journey.master.title'),
+          date: this.$t('about.journey.master.date'),
+          shortDescription: this.$t('about.journey.master.shortDescription'),
           fullDescription: `
-            <p>${this.t('about.journey.current.description')}</p>
-            <p>${this.t('about.journey.current.focus')}</p>
+            <p>${this.$t('about.journey.master.description')}</p>
+            <p>${this.$t('about.journey.master.focus')}</p>
             <ul>
-              <li>${this.t('about.journey.current.focus1')}</li>
-              <li>${this.t('about.journey.current.focus2')}</li>
-              <li>${this.t('about.journey.current.focus3')}</li>
+              <li>${this.$t('about.journey.master.focus1')}</li>
+              <li>${this.$t('about.journey.master.focus2')}</li>
+              <li>${this.$t('about.journey.master.focus3')}</li>
             </ul>
           `
         },
         {
-          title: this.t('about.journey.advanced.title'),
-          date: this.t('about.journey.advanced.date'),
-          shortDescription: this.t('about.journey.advanced.shortDescription'),
+          title: this.$t('about.journey.bachelor.title'),
+          date: this.$t('about.journey.bachelor.date'),
+          shortDescription: this.$t('about.journey.bachelor.shortDescription'),
           fullDescription: `
-            <p>${this.t('about.journey.advanced.description')}</p>
-            <p>${this.t('about.journey.advanced.achievements')}</p>
+            <p>${this.$t('about.journey.bachelor.description')}</p>
+            <p>${this.$t('about.journey.bachelor.achievements')}</p>
             <ul>
-              <li>${this.t('about.journey.advanced.achievement1')}</li>
-              <li>${this.t('about.journey.advanced.achievement2')}</li>
-              <li>${this.t('about.journey.advanced.achievement3')}</li>
+              <li>${this.$t('about.journey.bachelor.achievement1')}</li>
+              <li>${this.$t('about.journey.bachelor.achievement2')}</li>
+              <li>${this.$t('about.journey.bachelor.achievement3')}</li>
             </ul>
           `
         },
         {
-          title: this.t('about.journey.first.title'),
-          date: this.t('about.journey.first.date'),
-          shortDescription: this.t('about.journey.first.shortDescription'),
+          title: this.$t('about.journey.first.title'),
+          date: this.$t('about.journey.first.date'),
+          shortDescription: this.$t('about.journey.first.shortDescription'),
           fullDescription: `
-            <p>${this.t('about.journey.first.description')}</p>
-            <p>${this.t('about.journey.first.responsibilities')}</p>
+            <p>${this.$t('about.journey.first.description')}</p>
+            <p>${this.$t('about.journey.first.responsibilities')}</p>
             <ul>
-              <li>${this.t('about.journey.first.resp1')}</li>
-              <li>${this.t('about.journey.first.resp2')}</li>
-              <li>${this.t('about.journey.first.resp3')}</li>
+              <li>${this.$t('about.journey.first.resp1')}</li>
+              <li>${this.$t('about.journey.first.resp2')}</li>
+              <li>${this.$t('about.journey.first.resp3')}</li>
             </ul>
           `
         },
         {
-          title: this.t('about.journey.start.title'),
-          date: this.t('about.journey.start.date'),
-          shortDescription: this.t('about.journey.start.shortDescription'),
+          title: this.$t('about.journey.start.title'),
+          date: this.$t('about.journey.start.date'),
+          shortDescription: this.$t('about.journey.start.shortDescription'),
           fullDescription: `
-            <p>${this.t('about.journey.start.description')}</p>
-            <p>${this.t('about.journey.start.milestones')}</p>
+            <p>${this.$t('about.journey.start.description')}</p>
+            <p>${this.$t('about.journey.start.milestones')}</p>
             <ul>
-              <li>${this.t('about.journey.start.milestone1')}</li>
-              <li>${this.t('about.journey.start.milestone2')}</li>
-              <li>${this.t('about.journey.start.milestone3')}</li>
+              <li>${this.$t('about.journey.start.milestone1')}</li>
+              <li>${this.$t('about.journey.start.milestone2')}</li>
+              <li>${this.$t('about.journey.start.milestone3')}</li>
             </ul>
           `
         }
-      ] as TimelineEntry[],
-      selectedEntry: null as TimelineEntry | null
+      ]
     }
   },
   methods: {

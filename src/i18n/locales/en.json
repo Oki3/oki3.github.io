@@ -28,25 +28,25 @@
     },
     "journey": {
       "title": "My Journey",
-      "current": {
+      "master": {
         "title": "Current Position",
-        "date": "2024",
-        "shortDescription": "Senior Full Stack Developer",
-        "description": "Currently working as a Senior Full Stack Developer, leading development teams and architecting modern web applications.",
+        "date": "Present",
+        "shortDescription": "Master of Computer Science",
+        "description": "Currently pursuing a Master's degree in Computer Science at Delft University of Technology.",
         "focus": "Current focus:",
-        "focus1": "Leading development of enterprise applications",
-        "focus2": "Mentoring junior developers",
-        "focus3": "Implementing cutting-edge technologies"
+        "focus1": "Learning cutting-edge technologies (AIGC, LLM, Automation, etc.)",
+        "focus2": "Studying software architecture, design, and code analysis",
+        "focus3": "Exploring AI applications in software development"
       },
-      "advanced": {
-        "title": "Advanced Studies",
+      "bachelor": {
+        "title": "Bachelor of Computer Science",
         "date": "2020",
         "shortDescription": "Completed Advanced Web Development Certification",
         "description": "Pursued advanced studies in web development to enhance my skills.",
         "achievements": "Achievements:",
-        "achievement1": "Mastered Vue.js and React",
-        "achievement2": "Learned advanced TypeScript concepts",
-        "achievement3": "Studied software architecture patterns"
+        "achievement1": "Learned Java and relevant backend development stack (Spring, MyBatis, MySQL, Redis, Kafka, etc.)",
+        "achievement2": "Studied machine learning, neural networks, and data mining, and other fundamentals of modern computer science",
+        "achievement3": "Researched software architecture patterns, design patterns, databases, algorithms and data structures, computer networking, etc."
       },
       "first": {
         "title": "First Developer Role",
@@ -60,9 +60,9 @@
       },
       "start": {
         "title": "Started Programming Journey",
-        "date": "2018",
-        "shortDescription": "Began learning web development fundamentals",
-        "description": "My journey in programming began with a deep curiosity about how websites work. I started with HTML and CSS, gradually moving on to JavaScript and modern frameworks.",
+        "date": "2015",
+        "shortDescription": "Middle School",
+        "description": "My interest in programming began with low-code platforms in middle school and programming robotics with GUI.",
         "milestones": "Key milestones:",
         "milestone1": "Completed online courses in web development",
         "milestone2": "Built my first personal website",
