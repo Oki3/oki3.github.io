@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <section class="hero">
-      <h1>Welcome to My Blog</h1>
+      <h1>Welcome to My Casual & Code!</h1>
       <p>Exploring technology, development, and creative ideas</p>
     </section>
     

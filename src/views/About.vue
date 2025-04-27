@@ -1,8 +1,8 @@
 <template>
   <div class="about">
     <section class="about-header">
-      <h1>About Me</h1>
-      <p class="subtitle">Passionate about technology and sharing knowledge</p>
+      <h1>{{ $t('about.title') }}</h1>
+      <p class="subtitle">{{ $t('about.subtitle') }}</p>
     </section>
 
     <section class="about-content">
@@ -10,31 +10,23 @@
         <img src="https://picsum.photos/300/300" alt="Profile" class="profile-image">
         <div class="profile-info">
           <h2>John Doe</h2>
-          <p class="title">Full Stack Developer & Tech Enthusiast</p>
+          <p class="title">{{ $t('about.profile.title') }}</p>
           <div class="social-links">
-            <a href="#" class="social-link">GitHub</a>
-            <a href="#" class="social-link">LinkedIn</a>
-            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">{{ $t('about.profile.github') }}</a>
+            <a href="#" class="social-link">{{ $t('about.profile.linkedin') }}</a>
+            <a href="#" class="social-link">{{ $t('about.profile.twitter') }}</a>
           </div>
         </div>
       </div>
 
       <div class="bio-section">
-        <h3>My Story</h3>
-        <p>
-          I'm a passionate developer with over 5 years of experience in web development.
-          My journey in tech started with a curiosity about how things work on the internet,
-          which led me to learn programming and eventually become a full-stack developer.
-        </p>
-        <p>
-          I believe in writing clean, maintainable code and sharing knowledge with the
-          developer community. This blog is my platform to share insights, tutorials,
-          and experiences from my journey in tech.
-        </p>
+        <h3>{{ $t('about.story.title') }}</h3>
+        <p>{{ $t('about.story.paragraph1') }}</p>
+        <p>{{ $t('about.story.paragraph2') }}</p>
       </div>
 
       <div class="skills-section">
-        <h3>Skills & Expertise</h3>
+        <h3>{{ $t('about.skills.title') }}</h3>
         <div class="skills-grid">
           <div v-for="skill in skills" :key="skill.name" class="skill-card">
             <h4>{{ skill.name }}</h4>
@@ -44,12 +36,12 @@
       </div>
 
       <div class="timeline-section">
-        <h3>My Journey</h3>
+        <h3>{{ $t('about.journey.title') }}</h3>
         <div class="timeline">
           <div v-for="(entry, index) in timelineEntries" 
                :key="index" 
                class="timeline-entry"
-               :class="{ 'right': index % 2 === 0 }"
+               :class="{ 'right': index % 2 === 0, 'current': entry.title === $t('about.journey.current.title') }"
                @click="showTimelineDetails(entry)">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -76,6 +68,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 interface Skill {
   name: string
@@ -91,6 +84,10 @@ interface TimelineEntry {
 
 export default defineComponent({
   name: 'About',
+  setup() {
+    const { t } = useI18n()
+    return { t }
+  },
   data() {
     return {
       skills: [
@@ -113,59 +110,58 @@ export default defineComponent({
       ] as Skill[],
       timelineEntries: [
         {
-          title: 'Current Position',
-          date: '2024',
-          shortDescription: 'Senior Full Stack Developer',
+          title: this.t('about.journey.current.title'),
+          date: this.t('about.journey.current.date'),
+          shortDescription: this.t('about.journey.current.shortDescription'),
           fullDescription: `
-            <p>Currently working as a Senior Full Stack Developer, leading development teams and architecting modern web applications.</p>
-            <p>Current focus:</p>
+            <p>${this.t('about.journey.current.description')}</p>
+            <p>${this.t('about.journey.current.focus')}</p>
             <ul>
-              <li>Leading development of enterprise applications</li>
-              <li>Mentoring junior developers</li>
-              <li>Implementing cutting-edge technologies</li>
+              <li>${this.t('about.journey.current.focus1')}</li>
+              <li>${this.t('about.journey.current.focus2')}</li>
+              <li>${this.t('about.journey.current.focus3')}</li>
             </ul>
           `
         },
         {
-          title: 'Advanced Studies',
-          date: '2020',
-          shortDescription: 'Completed Advanced Web Development Certification',
+          title: this.t('about.journey.advanced.title'),
+          date: this.t('about.journey.advanced.date'),
+          shortDescription: this.t('about.journey.advanced.shortDescription'),
           fullDescription: `
-            <p>Pursued advanced studies in web development to enhance my skills.</p>
-            <p>Achievements:</p>
+            <p>${this.t('about.journey.advanced.description')}</p>
+            <p>${this.t('about.journey.advanced.achievements')}</p>
             <ul>
-              <li>Mastered Vue.js and React</li>
-              <li>Learned advanced TypeScript concepts</li>
-              <li>Studied software architecture patterns</li>
+              <li>${this.t('about.journey.advanced.achievement1')}</li>
+              <li>${this.t('about.journey.advanced.achievement2')}</li>
+              <li>${this.t('about.journey.advanced.achievement3')}</li>
             </ul>
           `
         },
         {
-          title: 'First Developer Role',
-          date: '2019',
-          shortDescription: 'Junior Frontend Developer at Tech Corp',
+          title: this.t('about.journey.first.title'),
+          date: this.t('about.journey.first.date'),
+          shortDescription: this.t('about.journey.first.shortDescription'),
           fullDescription: `
-            <p>My first professional role as a developer where I worked on various client projects.</p>
-            <p>Responsibilities:</p>
+            <p>${this.t('about.journey.first.description')}</p>
+            <p>${this.t('about.journey.first.responsibilities')}</p>
             <ul>
-              <li>Developed responsive web applications</li>
-              <li>Collaborated with design and backend teams</li>
-              <li>Implemented modern frontend frameworks</li>
+              <li>${this.t('about.journey.first.resp1')}</li>
+              <li>${this.t('about.journey.first.resp2')}</li>
+              <li>${this.t('about.journey.first.resp3')}</li>
             </ul>
           `
         },
         {
-          title: 'Started Programming Journey',
-          date: '2018',
-          shortDescription: 'Began learning web development fundamentals',
+          title: this.t('about.journey.start.title'),
+          date: this.t('about.journey.start.date'),
+          shortDescription: this.t('about.journey.start.shortDescription'),
           fullDescription: `
-            <p>My journey in programming began with a deep curiosity about how websites work. 
-            I started with HTML and CSS, gradually moving on to JavaScript and modern frameworks.</p>
-            <p>Key milestones:</p>
+            <p>${this.t('about.journey.start.description')}</p>
+            <p>${this.t('about.journey.start.milestones')}</p>
             <ul>
-              <li>Completed online courses in web development</li>
-              <li>Built my first personal website</li>
-              <li>Joined coding communities and forums</li>
+              <li>${this.t('about.journey.start.milestone1')}</li>
+              <li>${this.t('about.journey.start.milestone2')}</li>
+              <li>${this.t('about.journey.start.milestone3')}</li>
             </ul>
           `
         }
@@ -456,6 +452,49 @@ export default defineComponent({
 
 .timeline-entry.right {
   left: 50%;
+}
+
+.timeline-entry.current {
+  transform: scale(1.05);
+}
+
+.timeline-entry.current .timeline-content {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(52, 152, 219, 0.1));
+  border: 2px solid #3498db;
+  box-shadow: 0 15px 35px rgba(52, 152, 219, 0.2);
+}
+
+.timeline-entry.current .timeline-dot {
+  width: 25px;
+  height: 25px;
+  background: linear-gradient(45deg, #3498db, #2ecc71);
+  box-shadow: 0 0 20px rgba(52, 152, 219, 0.8);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+  }
+}
+
+.timeline-entry.current .timeline-date {
+  color: #3498db;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.timeline-entry.current h4 {
+  background: linear-gradient(45deg, #2c3e50, #3498db);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.4rem;
 }
 
 .timeline-dot {

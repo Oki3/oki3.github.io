@@ -1,0 +1,70 @@
+{
+  "nav": {
+    "home": "首页",
+    "about": "关于",
+    "toolkits": "工具包",
+    "projects": "项目",
+    "contact": "联系"
+  },
+  "about": {
+    "title": "关于我",
+    "subtitle": "热爱技术，分享知识",
+    "profile": {
+      "title": "全栈开发者 & 技术爱好者",
+      "github": "GitHub",
+      "linkedin": "领英",
+      "twitter": "推特"
+    },
+    "story": {
+      "title": "我的故事",
+      "paragraph1": "我是一名充满激情的开发者，拥有超过5年的Web开发经验。我的技术之旅始于对互联网工作原理的好奇，这促使我学习编程，最终成为一名全栈开发者。",
+      "paragraph2": "我相信编写清晰、可维护的代码，并与开发者社区分享知识。这个博客是我分享见解、教程和技术之旅经验的平台。"
+    },
+    "skills": {
+      "title": "技能与专长"
+    },
+    "journey": {
+      "title": "我的历程",
+      "current": {
+        "title": "当前职位",
+        "date": "2024",
+        "shortDescription": "高级全栈开发者",
+        "description": "目前担任高级全栈开发者，领导开发团队并设计现代Web应用。",
+        "focus": "当前重点：",
+        "focus1": "领导企业应用开发",
+        "focus2": "指导初级开发者",
+        "focus3": "实施前沿技术"
+      },
+      "advanced": {
+        "title": "进阶学习",
+        "date": "2020",
+        "shortDescription": "完成高级Web开发认证",
+        "description": "追求Web开发进阶学习以提升技能。",
+        "achievements": "成就：",
+        "achievement1": "掌握Vue.js和React",
+        "achievement2": "学习高级TypeScript概念",
+        "achievement3": "研究软件架构模式"
+      },
+      "first": {
+        "title": "首个开发职位",
+        "date": "2019",
+        "shortDescription": "Tech Corp初级前端开发者",
+        "description": "我的第一个专业开发职位，负责各种客户项目。",
+        "responsibilities": "职责：",
+        "resp1": "开发响应式Web应用",
+        "resp2": "与设计和后端团队协作",
+        "resp3": "实施现代前端框架"
+      },
+      "start": {
+        "title": "开始编程之旅",
+        "date": "2018",
+        "shortDescription": "开始学习Web开发基础",
+        "description": "我的编程之旅始于对网站工作原理的浓厚兴趣。我从HTML和CSS开始，逐渐过渡到JavaScript和现代框架。",
+        "milestones": "关键里程碑：",
+        "milestone1": "完成在线Web开发课程",
+        "milestone2": "构建第一个个人网站",
+        "milestone3": "加入编程社区和论坛"
+      }
+    }
+  }
+} 

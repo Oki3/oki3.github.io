@@ -1,13 +1,14 @@
 <template>
   <div class="app">
     <nav class="navbar">
-      <div class="nav-brand">My Blog</div>
+      <div class="nav-brand">Casual & Code</div>
       <div class="nav-links">
-        <router-link to="/" class="nav-link">Home</router-link>
-        <router-link to="/about" class="nav-link">About</router-link>
-        <router-link to="/toolkits" class="nav-link">Toolkits</router-link>
-        <router-link to="/projects" class="nav-link">Projects</router-link>
-        <router-link to="/contact" class="nav-link">Contact</router-link>
+        <router-link to="/" class="nav-link">{{ $t('nav.home') }}</router-link>
+        <router-link to="/about" class="nav-link">{{ $t('nav.about') }}</router-link>
+        <router-link to="/toolkits" class="nav-link">{{ $t('nav.toolkits') }}</router-link>
+        <router-link to="/projects" class="nav-link">{{ $t('nav.projects') }}</router-link>
+        <router-link to="/contact" class="nav-link">{{ $t('nav.contact') }}</router-link>
+        <LanguageSwitcher />
       </div>
     </nav>
     <main class="main-content">
@@ -21,9 +22,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import LanguageSwitcher from './components/LanguageSwitcher.vue'
 
 export default defineComponent({
-  name: 'App'
+  name: 'App',
+  components: {
+    LanguageSwitcher
+  }
 })
 </script>
 
@@ -83,6 +88,7 @@ export default defineComponent({
 .nav-links {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 .nav-link {
