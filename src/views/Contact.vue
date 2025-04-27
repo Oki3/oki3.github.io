@@ -1,102 +1,72 @@
 <template>
   <div class="contact">
     <section class="contact-header">
-      <h1>Get in Touch</h1>
-      <p class="subtitle">Feel free to reach out for collaborations or just a friendly hello</p>
+      <h1 :class="['animate-fade-in', { 'animate-reset': shouldAnimate }]">{{ $t('contact.header.title') }}</h1>
+      <p :class="['animate-fade-in-delay', { 'animate-reset': shouldAnimate }]">{{ $t('contact.header.subtitle') }}</p>
     </section>
 
     <section class="contact-content">
       <div class="contact-grid">
         <div class="contact-info">
-          <h2>Contact Information</h2>
+          <h2 :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">{{ $t('contact.info.title') }}</h2>
           <div class="info-items">
-            <div class="info-item">
-              <span class="info-icon">📧</span>
+            <div v-for="(item, index) in contactInfo" 
+                 :key="item.title"
+                 :class="['info-item', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
+                 :style="{ animationDelay: `${index * 0.2}s` }"
+            >
+              <span class="info-icon">{{ item.icon }}</span>
               <div class="info-content">
-                <h3>Email</h3>
-                <p>hello@example.com</p>
-              </div>
-            </div>
-            <div class="info-item">
-              <span class="info-icon">📍</span>
-              <div class="info-content">
-                <h3>Location</h3>
-                <p>San Francisco, CA</p>
-              </div>
-            </div>
-            <div class="info-item">
-              <span class="info-icon">💼</span>
-              <div class="info-content">
-                <h3>Work</h3>
-                <p>Available for freelance projects</p>
+                <h3>{{ $t(`contact.info.${item.key}.title`) }}</h3>
+                <p>{{ $t(`contact.info.${item.key}.value`) }}</p>
               </div>
             </div>
           </div>
 
           <div class="social-links">
-            <h3>Connect with me</h3>
+            <h3 :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">{{ $t('contact.social.title') }}</h3>
             <div class="social-icons">
-              <a href="#" class="social-icon" target="_blank">
-                <span class="icon">📱</span>
-                <span class="label">GitHub</span>
-              </a>
-              <a href="#" class="social-icon" target="_blank">
-                <span class="icon">💼</span>
-                <span class="label">LinkedIn</span>
-              </a>
-              <a href="#" class="social-icon" target="_blank">
-                <span class="icon">🐦</span>
-                <span class="label">Twitter</span>
+              <a v-for="(social, index) in socialLinks" 
+                 :key="social.platform"
+                 :href="social.url"
+                 :class="['social-icon', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
+                 :style="{ animationDelay: `${index * 0.2}s` }"
+                 target="_blank"
+              >
+                <span class="icon">{{ social.icon }}</span>
+                <span class="label">{{ $t(`contact.social.${social.platform}`) }}</span>
               </a>
             </div>
           </div>
         </div>
 
         <div class="contact-form">
-          <h2>Send a Message</h2>
+          <h2 :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">{{ $t('contact.form.title') }}</h2>
           <form @submit.prevent="handleSubmit">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                v-model="form.name"
+            <div v-for="(field, index) in formFields" 
+                 :key="field.id"
+                 :class="['form-group', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
+                 :style="{ animationDelay: `${index * 0.2}s` }"
+            >
+              <label :for="field.id">{{ $t(`contact.form.${field.key}.label`) }}</label>
+              <component 
+                :is="field.type === 'textarea' ? 'textarea' : 'input'"
+                :type="field.type"
+                :id="field.id"
+                v-model="form[field.key]"
                 required
-                placeholder="Your name"
+                :placeholder="$t(`contact.form.${field.key}.placeholder`)"
+                :rows="field.type === 'textarea' ? 5 : undefined"
               >
+              </component>
             </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                v-model="form.email"
-                required
-                placeholder="Your email"
-              >
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input
-                type="text"
-                id="subject"
-                v-model="form.subject"
-                required
-                placeholder="Message subject"
-              >
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea
-                id="message"
-                v-model="form.message"
-                required
-                placeholder="Your message"
-                rows="5"
-              ></textarea>
-            </div>
-            <button type="submit" class="submit-btn" :disabled="isSubmitting">
-              {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+            <button 
+              type="submit" 
+              class="submit-btn animate-slide-up"
+              :class="{ 'animate-reset': shouldAnimate }"
+              :disabled="isSubmitting"
+            >
+              {{ isSubmitting ? $t('contact.form.submit.sending') : $t('contact.form.submit.default') }}
             </button>
           </form>
         </div>
@@ -107,16 +77,26 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useAnimation } from '@/composables/useAnimation'
+import '@/assets/styles/animations.css'
 
 interface ContactForm {
   name: string
   email: string
   subject: string
   message: string
+  [key: string]: string
 }
 
 export default defineComponent({
   name: 'Contact',
+  setup() {
+    const { t } = useI18n()
+    const { shouldAnimate } = useAnimation()
+
+    return { t, shouldAnimate }
+  },
   data() {
     return {
       form: {
@@ -125,16 +105,31 @@ export default defineComponent({
         subject: '',
         message: ''
       } as ContactForm,
-      isSubmitting: false
+      isSubmitting: false,
+      contactInfo: [
+        { key: 'email', icon: '📧', title: 'Email' },
+        { key: 'location', icon: '📍', title: 'Location' },
+        { key: 'work', icon: '💼', title: 'Work' }
+      ],
+      socialLinks: [
+        { platform: 'github', icon: '📱', url: '#' },
+        { platform: 'linkedin', icon: '💼', url: '#' },
+        { platform: 'twitter', icon: '🐦', url: '#' }
+      ],
+      formFields: [
+        { id: 'name', key: 'name', type: 'text' },
+        { id: 'email', key: 'email', type: 'email' },
+        { id: 'subject', key: 'subject', type: 'text' },
+        { id: 'message', key: 'message', type: 'textarea' }
+      ]
     }
   },
   methods: {
     async handleSubmit() {
       this.isSubmitting = true
       try {
-        // Here you would typically make an API call to your backend
-        await new Promise(resolve => setTimeout(resolve, 1000)) // Simulated API call
-        alert('Message sent successfully!')
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        alert(this.t('contact.form.success'))
         this.form = {
           name: '',
           email: '',
@@ -142,7 +137,7 @@ export default defineComponent({
           message: ''
         }
       } catch (error) {
-        alert('Failed to send message. Please try again.')
+        alert(this.t('contact.form.error'))
       } finally {
         this.isSubmitting = false
       }
@@ -156,6 +151,7 @@ export default defineComponent({
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  user-select: none;
 }
 
 .contact-header {
@@ -266,6 +262,7 @@ export default defineComponent({
   border-radius: 4px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
+  user-select: none;
 }
 
 .form-group input:focus,

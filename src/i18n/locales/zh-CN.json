@@ -69,5 +69,83 @@
         "milestone3": "加入编程社区和论坛"
       }
     }
+  },
+  "contact": {
+    "header": {
+      "title": "联系我",
+      "subtitle": "欢迎联系我进行合作或只是打个招呼"
+    },
+    "info": {
+      "title": "联系方式",
+      "email": {
+        "title": "邮箱",
+        "value": "hello@example.com"
+      },
+      "location": {
+        "title": "位置",
+        "value": "旧金山，加利福尼亚"
+      },
+      "work": {
+        "title": "工作",
+        "value": "接受自由职业项目"
+      }
+    },
+    "social": {
+      "title": "社交媒体",
+      "github": "GitHub",
+      "linkedin": "领英",
+      "twitter": "推特"
+    },
+    "form": {
+      "title": "发送消息",
+      "name": {
+        "label": "姓名",
+        "placeholder": "您的姓名"
+      },
+      "email": {
+        "label": "邮箱",
+        "placeholder": "您的邮箱"
+      },
+      "subject": {
+        "label": "主题",
+        "placeholder": "消息主题"
+      },
+      "message": {
+        "label": "消息",
+        "placeholder": "您的消息"
+      },
+      "submit": {
+        "default": "发送消息",
+        "sending": "发送中..."
+      },
+      "success": "消息发送成功！",
+      "error": "发送消息失败，请重试。"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "欢迎来到我的技术博客！",
+      "subtitle": "探索技术、开发和创意想法"
+    },
+    "featured": {
+      "title": "精选文章",
+      "posts": {
+        "vue": {
+          "title": "Vue 3 入门指南",
+          "excerpt": "学习 Vue 3 的基础知识和组合式 API",
+          "category": "开发"
+        },
+        "typescript": {
+          "title": "TypeScript 最佳实践",
+          "excerpt": "提升代码质量的 TypeScript 核心模式",
+          "category": "TypeScript"
+        },
+        "webdev": {
+          "title": "现代 Web 开发",
+          "excerpt": "探索 Web 开发的最新趋势",
+          "category": "Web 开发"
+        }
+      }
+    }
   }
 } 

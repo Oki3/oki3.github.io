@@ -1,8 +1,8 @@
 <template>
   <div class="projects">
     <section class="projects-header">
-      <h1>My Projects</h1>
-      <p class="subtitle">A collection of my development work and contributions</p>
+      <h1 :class="['animate-fade-in', { 'animate-reset': shouldAnimate }]">{{ $t('projects.title') }}</h1>
+      <p :class="['animate-fade-in-delay', { 'animate-reset': shouldAnimate }]">{{ $t('projects.subtitle') }}</p>
     </section>
 
     <section class="projects-content">
@@ -18,26 +18,38 @@
       </div>
 
       <div class="projects-grid">
-        <div v-for="project in filteredProjects" :key="project.id" class="project-card">
-          <div class="project-image">
-            <img :src="project.image" :alt="project.title">
-          </div>
+        <article 
+          v-for="(project, index) in filteredProjects" 
+          :key="project.id"
+          :class="['project-card', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
+          :style="{ animationDelay: `${index * 0.2}s` }"
+        >
+          <img :src="project.image" :alt="project.title" class="project-image">
           <div class="project-content">
-            <h3>{{ project.title }}</h3>
+            <h2>{{ project.title }}</h2>
             <p>{{ project.description }}</p>
             <div class="project-tags">
-              <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
+              <span 
+                v-for="(tag, tagIndex) in project.tags" 
+                :key="tagIndex"
+                class="tag"
+              >
+                {{ tag }}
+              </span>
             </div>
             <div class="project-links">
-              <a v-if="project.github" :href="project.github" target="_blank" class="project-link">
-                <span class="link-icon">📦</span> GitHub
-              </a>
-              <a v-if="project.demo" :href="project.demo" target="_blank" class="project-link">
-                <span class="link-icon">🚀</span> Live Demo
+              <a 
+                v-for="(link, linkIndex) in project.links" 
+                :key="linkIndex"
+                :href="link.url"
+                :class="['project-link', link.type]"
+                target="_blank"
+              >
+                {{ link.text }}
               </a>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
   </div>
@@ -45,6 +57,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useAnimation } from '@/composables/useAnimation'
+import '@/assets/styles/animations.css'
+
+interface ProjectLink {
+  type: string
+  text: string
+  url: string
+}
 
 interface Project {
   id: number
@@ -52,12 +73,17 @@ interface Project {
   description: string
   image: string
   tags: string[]
-  github?: string
-  demo?: string
+  links: ProjectLink[]
 }
 
 export default defineComponent({
   name: 'Projects',
+  setup() {
+    const { t } = useI18n()
+    const { shouldAnimate } = useAnimation()
+
+    return { t, shouldAnimate }
+  },
   data() {
     return {
       selectedTags: [] as string[],
@@ -69,8 +95,10 @@ export default defineComponent({
           description: 'A full-stack e-commerce platform with Vue.js and Node.js',
           image: 'https://picsum.photos/600/400',
           tags: ['Vue.js', 'Node.js', 'TypeScript'],
-          github: 'https://github.com/example/ecommerce',
-          demo: 'https://ecommerce-demo.com'
+          links: [
+            { type: 'github', text: 'View Code', url: 'https://github.com/example/ecommerce' },
+            { type: 'demo', text: 'Live Demo', url: 'https://ecommerce-demo.com' }
+          ]
         },
         {
           id: 2,
@@ -78,8 +106,10 @@ export default defineComponent({
           description: 'A collaborative task management application with real-time updates',
           image: 'https://picsum.photos/600/401',
           tags: ['Vue.js', 'TypeScript', 'Firebase'],
-          github: 'https://github.com/example/task-manager',
-          demo: 'https://task-manager-demo.com'
+          links: [
+            { type: 'github', text: 'View Code', url: 'https://github.com/example/task-manager' },
+            { type: 'demo', text: 'Live Demo', url: 'https://task-manager-demo.com' }
+          ]
         },
         {
           id: 3,
@@ -87,7 +117,9 @@ export default defineComponent({
           description: 'Machine learning model for image classification using Python',
           image: 'https://picsum.photos/600/402',
           tags: ['Python', 'Machine Learning', 'TensorFlow'],
-          github: 'https://github.com/example/ml-classifier'
+          links: [
+            { type: 'github', text: 'View Code', url: 'https://github.com/example/ml-classifier' }
+          ]
         },
         {
           id: 4,
@@ -95,8 +127,10 @@ export default defineComponent({
           description: 'Personal portfolio website built with Vue.js and TypeScript',
           image: 'https://picsum.photos/600/403',
           tags: ['Vue.js', 'TypeScript'],
-          github: 'https://github.com/example/portfolio',
-          demo: 'https://portfolio-demo.com'
+          links: [
+            { type: 'github', text: 'View Code', url: 'https://github.com/example/portfolio' },
+            { type: 'demo', text: 'Live Demo', url: 'https://portfolio-demo.com' }
+          ]
         }
       ] as Project[]
     }
@@ -140,11 +174,15 @@ export default defineComponent({
   font-size: 2.5rem;
   color: #2c3e50;
   margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-.subtitle {
+.projects-header p {
   font-size: 1.2rem;
   color: #666;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .filters {
@@ -183,26 +221,23 @@ export default defineComponent({
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 .project-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .project-image {
   width: 100%;
   height: 200px;
-  overflow: hidden;
-}
-
-.project-image img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.project-card:hover .project-image img {
+.project-card:hover .project-image {
   transform: scale(1.05);
 }
 
@@ -210,31 +245,30 @@ export default defineComponent({
   padding: 1.5rem;
 }
 
-.project-content h3 {
+.project-content h2 {
   color: #2c3e50;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .project-content p {
   color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  line-height: 1.4;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
 }
 
 .project-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .tag {
-  background-color: #f0f2f5;
-  color: #666;
+  background: #f0f2f5;
+  color: #2c3e50;
   padding: 0.25rem 0.75rem;
   border-radius: 15px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .project-links {
@@ -243,35 +277,80 @@ export default defineComponent({
 }
 
 .project-link {
-  color: #3498db;
-  text-decoration: none;
-  font-size: 0.9rem;
   padding: 0.5rem 1rem;
-  border: 1px solid #3498db;
   border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
-.project-link:hover {
-  background-color: #3498db;
+.project-link.github {
+  background: #2c3e50;
   color: white;
 }
 
-.link-icon {
-  font-size: 1.1rem;
+.project-link.demo {
+  background: #3498db;
+  color: white;
+}
+
+.project-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.animate-fade-in-delay {
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease forwards;
+}
+
+.animate-reset {
+  animation: none !important;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animate-reset.animate-fade-in-delay {
+  transform: translateY(20px);
+}
+
+.animate-reset.animate-slide-up {
+  transform: translateY(30px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {
-  .project-links {
-    flex-direction: column;
-  }
-
-  .project-link {
-    text-align: center;
-    justify-content: center;
+  .projects-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style> 

@@ -1,21 +1,26 @@
 <template>
   <div class="home">
     <section class="hero">
-      <h1>Welcome to My Casual & Code!</h1>
-      <p>Exploring technology, development, and creative ideas</p>
+      <h1 :class="['animate-fade-in', { 'animate-reset': shouldAnimate }]">{{ $t('home.hero.title') }}</h1>
+      <p :class="['animate-fade-in-delay', { 'animate-reset': shouldAnimate }]">{{ $t('home.hero.subtitle') }}</p>
     </section>
     
     <section class="featured-posts">
-      <h2>Featured Posts</h2>
+      <h2 :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">{{ $t('home.featured.title') }}</h2>
       <div class="posts-grid">
-        <article v-for="post in featuredPosts" :key="post.id" class="post-card">
-          <img :src="post.image" :alt="post.title" class="post-image">
+        <article 
+          v-for="(post, index) in featuredPosts" 
+          :key="post.id" 
+          :class="['post-card', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
+          :style="{ animationDelay: `${index * 0.2}s` }"
+        >
+          <img :src="post.image" :alt="$t(post.titleKey)" class="post-image">
           <div class="post-content">
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.excerpt }}</p>
+            <h3>{{ $t(post.titleKey) }}</h3>
+            <p>{{ $t(post.excerptKey) }}</p>
             <div class="post-meta">
               <span class="date">{{ post.date }}</span>
-              <span class="category">{{ post.category }}</span>
+              <span class="category">{{ $t(post.categoryKey) }}</span>
             </div>
           </div>
         </article>
@@ -26,44 +31,53 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useAnimation } from '@/composables/useAnimation'
+import '@/assets/styles/animations.css'
 
 interface Post {
   id: number
-  title: string
-  excerpt: string
+  titleKey: string
+  excerptKey: string
   image: string
   date: string
-  category: string
+  categoryKey: string
 }
 
 export default defineComponent({
   name: 'Home',
+  setup() {
+    const { t } = useI18n()
+    const { shouldAnimate } = useAnimation()
+
+    return { t, shouldAnimate }
+  },
   data() {
     return {
       featuredPosts: [
         {
           id: 1,
-          title: 'Getting Started with Vue 3',
-          excerpt: 'Learn the basics of Vue 3 and its composition API',
+          titleKey: 'home.featured.posts.vue.title',
+          excerptKey: 'home.featured.posts.vue.excerpt',
           image: 'https://picsum.photos/400/250',
           date: 'April 27, 2024',
-          category: 'Development'
+          categoryKey: 'home.featured.posts.vue.category'
         },
         {
           id: 2,
-          title: 'TypeScript Best Practices',
-          excerpt: 'Essential TypeScript patterns for better code quality',
+          titleKey: 'home.featured.posts.typescript.title',
+          excerptKey: 'home.featured.posts.typescript.excerpt',
           image: 'https://picsum.photos/400/251',
           date: 'April 26, 2024',
-          category: 'TypeScript'
+          categoryKey: 'home.featured.posts.typescript.category'
         },
         {
           id: 3,
-          title: 'Modern Web Development',
-          excerpt: 'Exploring the latest trends in web development',
+          titleKey: 'home.featured.posts.webdev.title',
+          excerptKey: 'home.featured.posts.webdev.excerpt',
           image: 'https://picsum.photos/400/252',
           date: 'April 25, 2024',
-          category: 'Web Development'
+          categoryKey: 'home.featured.posts.webdev.category'
         }
       ] as Post[]
     }
@@ -84,16 +98,57 @@ export default defineComponent({
   color: white;
   border-radius: 8px;
   margin-bottom: 3rem;
+  overflow: hidden;
 }
 
 .hero h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .hero p {
   font-size: 1.2rem;
-  opacity: 0.9;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.animate-fade-in-delay {
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.animate-slide-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .featured-posts {
@@ -117,17 +172,24 @@ export default defineComponent({
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  opacity: 0;
 }
 
 .post-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .post-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.post-card:hover .post-image {
+  transform: scale(1.05);
 }
 
 .post-content {
@@ -155,5 +217,19 @@ export default defineComponent({
 .category {
   color: #3498db;
   font-weight: 500;
+}
+
+.animate-reset {
+  animation: none !important;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animate-reset.animate-fade-in-delay {
+  transform: translateY(20px);
+}
+
+.animate-reset.animate-slide-up {
+  transform: translateY(30px);
 }
 </style> 

@@ -77,6 +77,10 @@ onUnmounted(() => {
 <style scoped>
 .language-switcher {
   position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .language-picker {
@@ -150,6 +154,10 @@ onUnmounted(() => {
   padding: 0.8rem 1rem;
   color: #2c3e50;
   transition: all 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .language-option:hover {
