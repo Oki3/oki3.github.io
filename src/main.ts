@@ -4,6 +4,13 @@ import App from './App.vue'
 import router from './router'
 import './assets/main.css'
 
+// Handle redirects from 404 page
+const urlParams = new URLSearchParams(window.location.search)
+const redirectPath = urlParams.get('p')
+if (redirectPath) {
+  router.replace(redirectPath)
+}
+
 const app = createApp(App)
 
 app.use(createPinia())
