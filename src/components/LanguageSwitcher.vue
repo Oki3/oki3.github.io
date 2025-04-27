@@ -1,6 +1,6 @@
 <template>
   <div class="language-switcher">
-    <div class="language-picker" @click="toggleDropdown" ref="pickerRef">
+    <div class="language-picker" @click.prevent="toggleDropdown" ref="pickerRef" tabindex="-1">
       <div class="selected-language">
         <span class="language-flag">{{ getLanguageFlag(currentLang) }}</span>
         <span class="language-name">{{ getLanguageName(currentLang) }}</span>
@@ -94,6 +94,11 @@ onUnmounted(() => {
   color: #3498db;
   transition: all 0.3s ease;
   font-size: 0.9rem;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  outline: none;
 }
 
 .selected-language:hover {

@@ -9,6 +9,9 @@
   "about": {
     "title": "About Me",
     "subtitle": "Passionate about technology and sharing knowledge",
+    "author": {
+      "name": "Weicheng Hu"
+    },
     "profile": {
       "title": "Full Stack Developer & Tech Enthusiast",
       "github": "GitHub",

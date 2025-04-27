@@ -9,7 +9,7 @@
       <div class="profile-section">
         <img src="https://picsum.photos/300/300" alt="Profile" class="profile-image">
         <div class="profile-info">
-          <h2>John Doe</h2>
+          <h2>{{ $t('about.author.name') }}</h2>
           <p class="title">{{ $t('about.profile.title') }}</p>
           <div class="social-links">
             <a href="#" class="social-link">{{ $t('about.profile.github') }}</a>
@@ -462,6 +462,24 @@ export default defineComponent({
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(52, 152, 219, 0.1));
   border: 2px solid #3498db;
   box-shadow: 0 15px 35px rgba(52, 152, 219, 0.2);
+  animation: glowPulse 2s infinite;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 15px 35px rgba(52, 152, 219, 0.2);
+    border-color: #3498db;
+  }
+  50% {
+    box-shadow: 0 15px 35px rgba(52, 152, 219, 0.4),
+                0 0 20px rgba(52, 152, 219, 0.4),
+                0 0 30px rgba(52, 152, 219, 0.2);
+    border-color: #2ecc71;
+  }
+  100% {
+    box-shadow: 0 15px 35px rgba(52, 152, 219, 0.2);
+    border-color: #3498db;
+  }
 }
 
 .timeline-entry.current .timeline-dot {
@@ -469,17 +487,20 @@ export default defineComponent({
   height: 25px;
   background: linear-gradient(45deg, #3498db, #2ecc71);
   box-shadow: 0 0 20px rgba(52, 152, 219, 0.8);
-  animation: pulse 2s infinite;
+  animation: dotPulse 2s infinite;
 }
 
-@keyframes pulse {
+@keyframes dotPulse {
   0% {
+    transform: translateY(-50%) scale(1);
     box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
   }
-  70% {
+  50% {
+    transform: translateY(-50%) scale(1.2);
     box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
   }
   100% {
+    transform: translateY(-50%) scale(1);
     box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
   }
 }
@@ -488,6 +509,20 @@ export default defineComponent({
   color: #3498db;
   font-weight: bold;
   font-size: 1.1rem;
+  animation: textGlow 2s infinite;
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(52, 152, 219, 0.4),
+                 0 0 20px rgba(52, 152, 219, 0.2);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
+  }
 }
 
 .timeline-entry.current h4 {
@@ -495,6 +530,19 @@ export default defineComponent({
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 1.4rem;
+  animation: titleGlow 2s infinite;
+}
+
+@keyframes titleGlow {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2) drop-shadow(0 0 8px rgba(52, 152, 219, 0.4));
+  }
+  100% {
+    filter: brightness(1);
+  }
 }
 
 .timeline-dot {
