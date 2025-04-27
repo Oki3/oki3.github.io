@@ -13,6 +13,7 @@
           :key="post.id" 
           :class="['post-card', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
           :style="{ animationDelay: `${index * 0.2}s` }"
+          @click="viewPost(post)"
         >
           <img :src="post.image" :alt="$t(post.titleKey)" class="post-image">
           <div class="post-content">
@@ -32,6 +33,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 import { useAnimation } from '@/composables/useAnimation'
 import '@/assets/styles/animations.css'
 
@@ -42,15 +44,21 @@ interface Post {
   image: string
   date: string
   categoryKey: string
+  slug: string
 }
 
 export default defineComponent({
   name: 'Home',
   setup() {
     const { t } = useI18n()
+    const router = useRouter()
     const { shouldAnimate } = useAnimation()
+    
+    const viewPost = (post: Post) => {
+      router.push({ name: 'post-details', params: { slug: post.slug } });
+    };
 
-    return { t, shouldAnimate }
+    return { t, shouldAnimate, viewPost }
   },
   data() {
     return {
@@ -61,7 +69,8 @@ export default defineComponent({
           excerptKey: 'home.featured.posts.vue.excerpt',
           image: 'https://picsum.photos/400/250',
           date: 'April 27, 2024',
-          categoryKey: 'home.featured.posts.vue.category'
+          categoryKey: 'home.featured.posts.vue.category',
+          slug: 'getting-started-with-vue-3'
         },
         {
           id: 2,
@@ -69,7 +78,8 @@ export default defineComponent({
           excerptKey: 'home.featured.posts.typescript.excerpt',
           image: 'https://picsum.photos/400/251',
           date: 'April 26, 2024',
-          categoryKey: 'home.featured.posts.typescript.category'
+          categoryKey: 'home.featured.posts.typescript.category',
+          slug: 'typescript-best-practices'
         },
         {
           id: 3,
@@ -77,7 +87,8 @@ export default defineComponent({
           excerptKey: 'home.featured.posts.webdev.excerpt',
           image: 'https://picsum.photos/400/252',
           date: 'April 25, 2024',
-          categoryKey: 'home.featured.posts.webdev.category'
+          categoryKey: 'home.featured.posts.webdev.category',
+          slug: 'modern-web-development'
         }
       ] as Post[]
     }
@@ -174,6 +185,7 @@ export default defineComponent({
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   opacity: 0;
+  cursor: pointer;
 }
 
 .post-card:hover {

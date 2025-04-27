@@ -4,7 +4,8 @@
     "about": "About",
     "toolkits": "Toolkits",
     "projects": "Projects",
-    "contact": "Contact"
+    "contact": "Contact",
+    "posts": "Posts"
   },
   "about": {
     "title": "About Me",
@@ -137,6 +138,20 @@
           "category": "Web Development"
         }
       }
+    }
+  },
+  "posts": {
+    "title": "Blog Posts",
+    "subtitle": "Tutorials, articles, and thoughts on web development and programming",
+    "react": {
+      "title": "React Hooks Advanced Guide",
+      "excerpt": "Deep dive into React Hooks and advanced patterns",
+      "category": "React"
+    },
+    "css": {
+      "title": "CSS Grid and Flexbox Mastery",
+      "excerpt": "Modern layout techniques using CSS Grid and Flexbox",
+      "category": "CSS"
     }
   }
 } 

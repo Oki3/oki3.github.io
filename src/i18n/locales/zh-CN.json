@@ -2,9 +2,10 @@
   "nav": {
     "home": "首页",
     "about": "关于",
-    "toolkits": "工具包",
+    "toolkits": "工具箱",
     "projects": "项目",
-    "contact": "联系"
+    "contact": "联系我",
+    "posts": "博客"
   },
   "about": {
     "title": "关于我",
@@ -115,28 +116,42 @@
   },
   "home": {
     "hero": {
-      "title": "欢迎来到我的技术博客！",
+      "title": "欢迎来到我的Casual & Code!",
       "subtitle": "探索技术、开发和创意想法"
     },
     "featured": {
       "title": "精选文章",
       "posts": {
         "vue": {
-          "title": "Vue 3 入门指南",
-          "excerpt": "学习 Vue 3 的基础知识和组合式 API",
+          "title": "Vue 3入门指南",
+          "excerpt": "学习Vue 3基础和组合式API",
           "category": "开发"
         },
         "typescript": {
-          "title": "TypeScript 最佳实践",
-          "excerpt": "提升代码质量的 TypeScript 核心模式",
+          "title": "TypeScript最佳实践",
+          "excerpt": "提高代码质量的TypeScript模式",
           "category": "TypeScript"
         },
         "webdev": {
-          "title": "现代 Web 开发",
-          "excerpt": "探索 Web 开发的最新趋势",
-          "category": "Web 开发"
+          "title": "现代Web开发",
+          "excerpt": "探索Web开发的最新趋势",
+          "category": "Web开发"
         }
       }
+    }
+  },
+  "posts": {
+    "title": "博客文章",
+    "subtitle": "关于Web开发和编程的教程、文章和思考",
+    "react": {
+      "title": "React Hooks高级指南",
+      "excerpt": "深入探讨React Hooks和高级模式",
+      "category": "React"
+    },
+    "css": {
+      "title": "CSS Grid和Flexbox精通",
+      "excerpt": "使用CSS Grid和Flexbox的现代布局技术",
+      "category": "CSS"
     }
   }
 } 

@@ -33,6 +33,18 @@ const router = createRouter({
       name: 'contact',
       component: () => import('../views/Contact.vue'),
       meta: { title: 'Contact | Casual & Code' }
+    },
+    {
+      path: '/posts',
+      name: 'posts',
+      component: () => import('../views/Posts.vue'),
+      meta: { title: 'Blog Posts | Casual & Code' }
+    },
+    {
+      path: '/posts/:slug',
+      name: 'post-details',
+      component: () => import('../views/PostDetails.vue'),
+      meta: { title: 'Post | Casual & Code' }
     }
   ]
 })
