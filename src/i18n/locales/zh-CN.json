@@ -20,8 +20,8 @@
     },
     "story": {
       "title": "我的故事",
-      "paragraph1": "我是一名充满干劲的开发者，我认为从0到1的创造过程是很一件既有趣又有成就感的事情。",
-      "paragraph2": "我喜欢实践新技术，并将其应用到实际项目中。这个博客是我踩坑和实现一些个人想法的地方。"
+      "paragraph1": "我是一名仍在探索职业可能性的菜鸟开发，我认为从0到1的创造是很一件既有趣又有成就感的事情。只可惜想法太多，时间太少。",
+      "paragraph2": "我喜欢实践新技术，并将其应用到实际项目中。这个博客是我踩坑和实现一些个人想法的地方。希望可以对你有帮助。"
     },
     "skills": {
       "title": "技能与专长"
@@ -41,22 +41,12 @@
       "bachelor": {
         "title": "计算机科学 本科",
         "date": "2020",
-        "shortDescription": "完成高级Web开发认证",
+        "shortDescription": "在代尔夫特理工大学完成了计算机科学本科学习。",
         "description": "追求Web开发进阶学习以提升技能。",
         "achievements": "成就：",
         "achievement1": "学习java与相关后端开发技术栈（Spring、MyBatis、MySQL、Redis、Kafka等）",
         "achievement2": "学习机器学习、神经网络及数据挖掘等现代计算机科学基础",
         "achievement3": "研究软件架构模式、设计模式、数据库、算法和数据结构、计算机网络等"
-      },
-      "first": {
-        "title": "首个开发职位",
-        "date": "2019",
-        "shortDescription": "Tech Corp初级前端开发者",
-        "description": "我的第一个专业开发职位，负责各种客户项目。",
-        "responsibilities": "职责：",
-        "resp1": "开发响应式Web应用",
-        "resp2": "与设计和后端团队协作",
-        "resp3": "实施现代前端框架"
       },
       "start": {
         "title": "开始编程之旅",

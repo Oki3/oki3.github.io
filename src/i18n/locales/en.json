@@ -20,8 +20,8 @@
     },
     "story": {
       "title": "My Story",
-      "paragraph1": "I'm a passionate developer with over 5 years of experience in web development. My journey in tech started with a curiosity about how things work on the internet, which led me to learn programming and eventually become a full-stack developer.",
-      "paragraph2": "I believe in writing clean, maintainable code and sharing knowledge with the developer community. This blog is my platform to share insights, tutorials, and experiences from my journey in tech."
+      "paragraph1": "I'm a rookie developer still exploring career possibilities, and I think creating from 0 to 1 is a lot of fun and fulfilling. Unfortunately, I have many ideas and too little time.",
+      "paragraph2": "I love to practice new technologies and apply them to real projects. This blog is where I step through the potholes and realise some of my personal ideas. I hope you can find something useful here."
     },
     "skills": {
       "title": "Skills & Expertise"
@@ -41,27 +41,17 @@
       "bachelor": {
         "title": "Bachelor of Computer Science",
         "date": "2020",
-        "shortDescription": "Completed Advanced Web Development Certification",
+        "shortDescription": "Completed bachelor of Computer Science at Delft University of Technology.",
         "description": "Pursued advanced studies in web development to enhance my skills.",
         "achievements": "Achievements:",
         "achievement1": "Learned Java and relevant backend development stack (Spring, MyBatis, MySQL, Redis, Kafka, etc.)",
         "achievement2": "Studied machine learning, neural networks, and data mining, and other fundamentals of modern computer science",
         "achievement3": "Researched software architecture patterns, design patterns, databases, algorithms and data structures, computer networking, etc."
       },
-      "first": {
-        "title": "First Developer Role",
-        "date": "2019",
-        "shortDescription": "Junior Frontend Developer at Tech Corp",
-        "description": "My first professional role as a developer where I worked on various client projects.",
-        "responsibilities": "Responsibilities:",
-        "resp1": "Developed responsive web applications",
-        "resp2": "Collaborated with design and backend teams",
-        "resp3": "Implemented modern frontend frameworks"
-      },
       "start": {
         "title": "Started Programming Journey",
         "date": "2015",
-        "shortDescription": "Middle School",
+        "shortDescription": "Completed A-Level with A* in Maths, A in Further Maths, and A in Physics.",
         "description": "My interest in programming began with low-code platforms in middle school and programming robotics with GUI.",
         "milestones": "Key milestones:",
         "milestone1": "Completed online courses in web development",

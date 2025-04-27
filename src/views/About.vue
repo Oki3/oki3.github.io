@@ -143,20 +143,6 @@ export default defineComponent({
           `
         },
         {
-          title: this.$t('about.journey.first.title'),
-          date: this.$t('about.journey.first.date'),
-          shortDescription: this.$t('about.journey.first.shortDescription'),
-          fullDescription: `
-            <p>${this.$t('about.journey.first.description')}</p>
-            <p>${this.$t('about.journey.first.responsibilities')}</p>
-            <ul>
-              <li>${this.$t('about.journey.first.resp1')}</li>
-              <li>${this.$t('about.journey.first.resp2')}</li>
-              <li>${this.$t('about.journey.first.resp3')}</li>
-            </ul>
-          `
-        },
-        {
           title: this.$t('about.journey.start.title'),
           date: this.$t('about.journey.start.date'),
           shortDescription: this.$t('about.journey.start.shortDescription'),
