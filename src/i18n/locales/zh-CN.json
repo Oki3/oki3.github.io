@@ -21,7 +21,8 @@
     "story": {
       "title": "我的故事",
       "paragraph1": "我是一名仍在探索职业可能性的菜鸟开发，我认为从0到1的创造是很一件既有趣又有成就感的事情。只可惜想法太多，时间太少。",
-      "paragraph2": "我喜欢实践新技术，并将其应用到实际项目中。这个博客是我踩坑和实现一些个人想法的地方。希望可以对你有帮助。"
+      "paragraph2": "我喜欢实践新技术，并将其应用到实际项目中。这个博客是我踩坑和实现一些个人想法的地方。希望可以对你有帮助。",
+      "paragraph3": "我通常在Linux上进行开发，因此下载项目需要一些小黑屏基础。我有时也会用Unity和Blender实现一下不知何时可以落地的独立游戏。"
     },
     "skills": {
       "title": "技能与专长"
@@ -29,9 +30,9 @@
     "journey": {
       "title": "我的历程",
       "master": {
-        "title": "当前职位",
-        "date": "至今",
-        "shortDescription": "计算机科学 硕士",
+        "title": "计算机科学 硕士",
+        "date": "2024 - 现在",
+        "shortDescription": "深入研究软件开发及分布式系统。",
         "description": "在代尔夫特理工大学攻读计算机科学硕士学位。",
         "focus": "当前重点：",
         "focus1": "学习前沿技术（AIGC、LLM、自动化等）",
@@ -49,9 +50,9 @@
         "achievement3": "研究软件架构模式、设计模式、数据库、算法和数据结构、计算机网络等"
       },
       "start": {
-        "title": "开始编程之旅",
-        "date": "2015",
-        "shortDescription": "初中",
+        "title": "Caxton College Valencia",
+        "date": "2015 - 2020",
+        "shortDescription": "A-Level 数学A*，物理、进阶数学A",
         "description": "编程兴趣始于在中学接触的低代码平台，以及使用GUI对robotics进行组装与编程。",
         "milestones": "关键里程碑：",
         "milestone1": "完成在线Web开发课程",

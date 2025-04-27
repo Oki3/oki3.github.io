@@ -21,7 +21,8 @@
     "story": {
       "title": "My Story",
       "paragraph1": "I'm a rookie developer still exploring career possibilities, and I think creating from 0 to 1 is a lot of fun and fulfilling. Unfortunately, I have many ideas and too little time.",
-      "paragraph2": "I love to practice new technologies and apply them to real projects. This blog is where I step through the potholes and realise some of my personal ideas. I hope you can find something useful here."
+      "paragraph2": "I love to practice new technologies and apply them to real projects. This blog is where I step through the potholes and realise some of my personal ideas. I hope you can find something useful here.",
+      "paragraph3": "I usually work on Linux FYI if you want to download projects to play. I sometimes playing with Unity and Blender for interest."
     },
     "skills": {
       "title": "Skills & Expertise"
@@ -29,9 +30,9 @@
     "journey": {
       "title": "My Journey",
       "master": {
-        "title": "Current Position",
-        "date": "Present",
-        "shortDescription": "Master of Computer Science",
+        "title": "Master of Computer Science",
+        "date": "2024 - Present",
+        "shortDescription": "Study state-of-the-art in software development and distributed systems.",
         "description": "Currently pursuing a Master's degree in Computer Science at Delft University of Technology.",
         "focus": "Current focus:",
         "focus1": "Learning cutting-edge technologies (AIGC, LLM, Automation, etc.)",
@@ -40,7 +41,7 @@
       },
       "bachelor": {
         "title": "Bachelor of Computer Science",
-        "date": "2020",
+        "date": "2020 - 2024",
         "shortDescription": "Completed bachelor of Computer Science at Delft University of Technology.",
         "description": "Pursued advanced studies in web development to enhance my skills.",
         "achievements": "Achievements:",
@@ -49,8 +50,8 @@
         "achievement3": "Researched software architecture patterns, design patterns, databases, algorithms and data structures, computer networking, etc."
       },
       "start": {
-        "title": "Started Programming Journey",
-        "date": "2015",
+        "title": "Caxton College Valencia",
+        "date": "2015 - 2020",
         "shortDescription": "Completed A-Level with A* in Maths, A in Further Maths, and A in Physics.",
         "description": "My interest in programming began with low-code platforms in middle school and programming robotics with GUI.",
         "milestones": "Key milestones:",

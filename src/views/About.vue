@@ -12,8 +12,8 @@
           <h2>{{ $t('about.author.name') }}</h2>
           <p class="title">{{ $t('about.profile.title') }}</p>
           <div class="social-links">
-            <a href="#" class="social-link">{{ $t('about.profile.github') }}</a>
-            <a href="#" class="social-link">{{ $t('about.profile.linkedin') }}</a>
+            <a href="https://github.com/Oki3" target="_blank" rel="noopener" class="social-link">{{ $t('about.profile.github') }}</a>
+            <a href="https://www.linkedin.com/in/weicheng-h-15b84121b/" target="_blank" rel="noopener" class="social-link">{{ $t('about.profile.linkedin') }}</a>
             <a href="#" class="social-link">{{ $t('about.profile.twitter') }}</a>
           </div>
         </div>
@@ -23,6 +23,7 @@
         <h3>{{ $t('about.story.title') }}</h3>
         <p>{{ $t('about.story.paragraph1') }}</p>
         <p>{{ $t('about.story.paragraph2') }}</p>
+        <p>{{ $t('about.story.paragraph3') }}</p>
       </div>
 
       <div class="skills-section">
@@ -93,20 +94,16 @@ export default defineComponent({
       skills: [
         {
           name: 'Frontend Development',
-          description: 'Vue.js, React, TypeScript, HTML5, CSS3'
+          description: 'Vue.js, React(Native), TypeScript'
         },
         {
           name: 'Backend Development',
-          description: 'Node.js, Python, Java, SQL, NoSQL'
+          description: 'Python, Java(Spring, MyBatis, Kafka, Redis), PostgreSQL, MongoDB'
         },
         {
           name: 'DevOps',
-          description: 'Docker, Kubernetes, CI/CD, AWS'
+          description: 'Docker, CI/CD, AWS, Agile',
         },
-        {
-          name: 'UI/UX Design',
-          description: 'Figma, Adobe XD, Responsive Design'
-        }
       ] as Skill[],
       selectedEntry: null as TimelineEntry | null
     }
