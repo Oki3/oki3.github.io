@@ -1,19 +1,18 @@
 <template>
   <div class="contact">
     <section class="contact-header">
-      <h1 :class="['animate-fade-in', { 'animate-reset': shouldAnimate }]">{{ $t('contact.header.title') }}</h1>
-      <p :class="['animate-fade-in-delay', { 'animate-reset': shouldAnimate }]">{{ $t('contact.header.subtitle') }}</p>
+      <h1>{{ $t('contact.header.title') }}</h1>
+      <p>{{ $t('contact.header.subtitle') }}</p>
     </section>
 
     <section class="contact-content">
       <div class="contact-grid">
         <div class="contact-info">
-          <h2 :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">{{ $t('contact.info.title') }}</h2>
+          <h2>{{ $t('contact.info.title') }}</h2>
           <div class="info-items">
             <div v-for="(item, index) in contactInfo" 
                  :key="item.title"
-                 :class="['info-item', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
-                 :style="{ animationDelay: `${index * 0.2}s` }"
+                 class="info-item"
             >
               <span class="info-icon">{{ item.icon }}</span>
               <div class="info-content">
@@ -24,13 +23,12 @@
           </div>
 
           <div class="social-links">
-            <h3 :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">{{ $t('contact.social.title') }}</h3>
+            <h3>{{ $t('contact.social.title') }}</h3>
             <div class="social-icons">
               <a v-for="(social, index) in socialLinks" 
                  :key="social.platform"
                  :href="social.url"
-                 :class="['social-icon', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
-                 :style="{ animationDelay: `${index * 0.2}s` }"
+                 class="social-icon"
                  target="_blank"
               >
                 <span class="icon">{{ social.icon }}</span>
@@ -41,12 +39,11 @@
         </div>
 
         <div class="contact-form">
-          <h2 :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">{{ $t('contact.form.title') }}</h2>
+          <h2>{{ $t('contact.form.title') }}</h2>
           <form @submit.prevent="handleSubmit">
             <div v-for="(field, index) in formFields" 
                  :key="field.id"
-                 :class="['form-group', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
-                 :style="{ animationDelay: `${index * 0.2}s` }"
+                 class="form-group"
             >
               <label :for="field.id">{{ $t(`contact.form.${field.key}.label`) }}</label>
               <component 
@@ -62,8 +59,7 @@
             </div>
             <button 
               type="submit" 
-              class="submit-btn animate-slide-up"
-              :class="{ 'animate-reset': shouldAnimate }"
+              class="submit-btn"
               :disabled="isSubmitting"
             >
               {{ isSubmitting ? $t('contact.form.submit.sending') : $t('contact.form.submit.default') }}
@@ -93,9 +89,9 @@ export default defineComponent({
   name: 'Contact',
   setup() {
     const { t } = useI18n()
-    const { shouldAnimate } = useAnimation()
+    const { } = useAnimation()
 
-    return { t, shouldAnimate }
+    return { t }
   },
   data() {
     return {
