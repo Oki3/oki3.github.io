@@ -42,6 +42,34 @@
           </div>
         </div>
       </div>
+
+      <div class="timeline-section">
+        <h3>My Journey</h3>
+        <div class="timeline">
+          <div v-for="(entry, index) in timelineEntries" 
+               :key="index" 
+               class="timeline-entry"
+               :class="{ 'right': index % 2 === 0 }"
+               @click="showTimelineDetails(entry)">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>{{ entry.title }}</h4>
+              <p class="timeline-date">{{ entry.date }}</p>
+              <p class="timeline-description">{{ entry.shortDescription }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline Details Modal -->
+      <div v-if="selectedEntry" class="timeline-modal" @click.self="closeTimelineDetails">
+        <div class="modal-content">
+          <button class="close-button" @click="closeTimelineDetails">&times;</button>
+          <h3>{{ selectedEntry.title }}</h3>
+          <p class="modal-date">{{ selectedEntry.date }}</p>
+          <div class="modal-description" v-html="selectedEntry.fullDescription"></div>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -52,6 +80,13 @@ import { defineComponent } from 'vue'
 interface Skill {
   name: string
   description: string
+}
+
+interface TimelineEntry {
+  title: string
+  date: string
+  shortDescription: string
+  fullDescription: string
 }
 
 export default defineComponent({
@@ -75,7 +110,61 @@ export default defineComponent({
           name: 'UI/UX Design',
           description: 'Figma, Adobe XD, Responsive Design'
         }
-      ] as Skill[]
+      ] as Skill[],
+      timelineEntries: [
+        {
+          title: 'Started Programming Journey',
+          date: '2018',
+          shortDescription: 'Began learning web development fundamentals',
+          fullDescription: `
+            <p>My journey in programming began with a deep curiosity about how websites work. 
+            I started with HTML and CSS, gradually moving on to JavaScript and modern frameworks.</p>
+            <p>Key milestones:</p>
+            <ul>
+              <li>Completed online courses in web development</li>
+              <li>Built my first personal website</li>
+              <li>Joined coding communities and forums</li>
+            </ul>
+          `
+        },
+        {
+          title: 'First Developer Role',
+          date: '2019',
+          shortDescription: 'Junior Frontend Developer at Tech Corp',
+          fullDescription: `
+            <p>My first professional role as a developer where I worked on various client projects.</p>
+            <p>Responsibilities:</p>
+            <ul>
+              <li>Developed responsive web applications</li>
+              <li>Collaborated with design and backend teams</li>
+              <li>Implemented modern frontend frameworks</li>
+            </ul>
+          `
+        },
+        {
+          title: 'Advanced Studies',
+          date: '2020',
+          shortDescription: 'Completed Advanced Web Development Certification',
+          fullDescription: `
+            <p>Pursued advanced studies in web development to enhance my skills.</p>
+            <p>Achievements:</p>
+            <ul>
+              <li>Mastered Vue.js and React</li>
+              <li>Learned advanced TypeScript concepts</li>
+              <li>Studied software architecture patterns</li>
+            </ul>
+          `
+        }
+      ] as TimelineEntry[],
+      selectedEntry: null as TimelineEntry | null
+    }
+  },
+  methods: {
+    showTimelineDetails(entry: TimelineEntry) {
+      this.selectedEntry = entry
+    },
+    closeTimelineDetails() {
+      this.selectedEntry = null
     }
   }
 })
@@ -193,6 +282,144 @@ export default defineComponent({
   line-height: 1.4;
 }
 
+.timeline-section {
+  margin: 4rem 0;
+}
+
+.timeline-section h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background: #3498db;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -1px;
+}
+
+.timeline-entry {
+  position: relative;
+  margin-bottom: 2rem;
+  width: 50%;
+  padding: 0 2rem;
+  cursor: pointer;
+}
+
+.timeline-entry.right {
+  left: 50%;
+}
+
+.timeline-dot {
+  width: 16px;
+  height: 16px;
+  background: #3498db;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.timeline-entry.right .timeline-dot {
+  left: 0;
+}
+
+.timeline-content {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+}
+
+.timeline-content h4 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-date {
+  color: #3498db;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-description {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.timeline-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.modal-date {
+  color: #3498db;
+  margin-bottom: 1rem;
+}
+
+.modal-description {
+  color: #666;
+  line-height: 1.6;
+}
+
+.modal-description ul {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+}
+
+.modal-description li {
+  margin-bottom: 0.5rem;
+}
+
 @media (max-width: 768px) {
   .profile-section {
     flex-direction: column;
@@ -201,6 +428,23 @@ export default defineComponent({
 
   .social-links {
     justify-content: center;
+  }
+
+  .timeline::before {
+    left: 0;
+  }
+
+  .timeline-entry {
+    width: 100%;
+    padding-left: 2rem;
+  }
+
+  .timeline-entry.right {
+    left: 0;
+  }
+
+  .timeline-dot {
+    left: -8px;
   }
 }
 </style> 
