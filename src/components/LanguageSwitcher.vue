@@ -12,6 +12,7 @@
           :key="lang.code"
           :class="['language-option', { active: currentLang === lang.code }]"
           @click="changeLanguage(lang.code)"
+          tabindex="-1"
         >
           <span class="language-flag">{{ getLanguageFlag(lang.code) }}</span>
           <span class="language-name">{{ lang.name }}</span>

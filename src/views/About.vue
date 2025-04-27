@@ -697,14 +697,101 @@ export default defineComponent({
 }
 
 @media (max-width: 768px) {
+  .about {
+    padding: 1rem;
+  }
+
+  .about-header {
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+  }
+
+  .about-header h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
   .profile-section {
     flex-direction: column;
     text-align: center;
     padding: 1.5rem;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .profile-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .profile-info h2 {
+    font-size: 1.8rem;
+  }
+
+  .title {
+    font-size: 1rem;
   }
 
   .social-links {
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .social-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .bio-section {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .bio-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .bio-section p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .skills-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .skill-card {
+    padding: 1.5rem;
+  }
+
+  .skill-card h4 {
+    font-size: 1.2rem;
+  }
+
+  .skill-card p {
+    font-size: 0.9rem;
+  }
+
+  .timeline-section {
+    margin: 2rem 0;
+  }
+
+  .timeline-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .timeline {
+    padding: 1rem 0;
   }
 
   .timeline::before {
@@ -714,6 +801,7 @@ export default defineComponent({
   .timeline-entry {
     width: 100%;
     padding-left: 2rem;
+    margin-bottom: 2rem;
   }
 
   .timeline-entry.right {
@@ -724,13 +812,121 @@ export default defineComponent({
     left: -10px;
   }
 
+  .timeline-content {
+    padding: 1.5rem;
+  }
+
+  .timeline-content h4 {
+    font-size: 1.2rem;
+  }
+
+  .timeline-date {
+    font-size: 0.9rem;
+  }
+
+  .timeline-description {
+    font-size: 0.9rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .modal-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .modal-date {
+    font-size: 1rem;
+  }
+
+  .modal-description {
+    font-size: 1rem;
+  }
+
+  .modal-description ul {
+    padding-left: 1rem;
+  }
+
+  .modal-description li {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Adjust animations for mobile */
+  .timeline-entry.current {
+    transform: scale(1.02);
+  }
+
+  .timeline-entry.current .timeline-content {
+    animation: glowPulse 3s infinite;
+  }
+
+  @keyframes glowPulse {
+    0% {
+      box-shadow: 0 10px 25px rgba(52, 152, 219, 0.2);
+      border-color: #3498db;
+    }
+    50% {
+      box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3),
+                  0 0 15px rgba(52, 152, 219, 0.3),
+                  0 0 20px rgba(52, 152, 219, 0.2);
+      border-color: #2ecc71;
+    }
+    100% {
+      box-shadow: 0 10px 25px rgba(52, 152, 219, 0.2);
+      border-color: #3498db;
+    }
+  }
+
+  .timeline-entry.current .timeline-dot {
+    animation: dotPulse 3s infinite;
+  }
+
+  @keyframes dotPulse {
+    0% {
+      transform: translateY(-50%) scale(1);
+      box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.3);
+    }
+    50% {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 0 0 8px rgba(52, 152, 219, 0);
+    }
+    100% {
+      transform: translateY(-50%) scale(1);
+      box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+    }
+  }
+}
+
+/* Additional breakpoint for very small screens */
+@media (max-width: 480px) {
   .about-header h1 {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
   }
 
   .profile-image {
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile-info h2 {
+    font-size: 1.5rem;
+  }
+
+  .social-link {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .timeline-content {
+    padding: 1rem;
+  }
+
+  .modal-content {
+    padding: 1rem;
   }
 }
 </style> 
