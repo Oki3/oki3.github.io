@@ -193,15 +193,15 @@ export default defineComponent({
   transform: translateX(-50%);
   width: 100px;
   height: 4px;
-  background: linear-gradient(90deg, #3498db, #2ecc71);
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
   border-radius: 2px;
 }
 
 .about-header h1 {
   font-size: 3rem;
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 1rem;
-  background: linear-gradient(45deg, #2c3e50, #3498db);
+  background: linear-gradient(45deg, var(--text-color), var(--accent-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
@@ -209,7 +209,7 @@ export default defineComponent({
 
 .subtitle {
   font-size: 1.3rem;
-  color: #666;
+  color: var(--text-color);
   font-style: italic;
   letter-spacing: 1px;
 }
@@ -219,10 +219,10 @@ export default defineComponent({
   align-items: center;
   gap: 3rem;
   margin-bottom: 4rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--card-bg-color);
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: var(--card-shadow);
   transition: transform 0.3s ease;
 }
 
@@ -235,8 +235,8 @@ export default defineComponent({
   height: 250px;
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid #fff;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border: 5px solid var(--card-bg-color);
+  box-shadow: var(--card-shadow);
   transition: transform 0.3s ease;
 }
 
@@ -246,14 +246,14 @@ export default defineComponent({
 
 .profile-info h2 {
   font-size: 2.5rem;
-  background: linear-gradient(45deg, #2c3e50, #3498db);
+  background: linear-gradient(45deg, var(--text-color), var(--accent-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
 }
 
 .title {
-  color: #666;
+  color: var(--text-color);
   margin-bottom: 1.5rem;
   font-size: 1.2rem;
   letter-spacing: 1px;
@@ -265,10 +265,10 @@ export default defineComponent({
 }
 
 .social-link {
-  color: #3498db;
+  color: var(--accent-color);
   text-decoration: none;
   padding: 0.8rem 1.5rem;
-  border: 2px solid #3498db;
+  border: 2px solid var(--accent-color);
   border-radius: 25px;
   transition: all 0.3s ease;
   font-weight: 500;
@@ -276,7 +276,7 @@ export default defineComponent({
 }
 
 .social-link:hover {
-  background: linear-gradient(45deg, #3498db, #2ecc71);
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-secondary));
   color: white;
   border-color: transparent;
   transform: translateY(-2px);
@@ -285,15 +285,15 @@ export default defineComponent({
 
 .bio-section {
   margin-bottom: 4rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--card-bg-color);
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: var(--card-shadow);
 }
 
 .bio-section h3 {
   font-size: 1.8rem;
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 1.5rem;
   position: relative;
   padding-bottom: 0.5rem;
@@ -306,12 +306,12 @@ export default defineComponent({
   left: 0;
   width: 50px;
   height: 3px;
-  background: linear-gradient(90deg, #3498db, #2ecc71);
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
   border-radius: 2px;
 }
 
 .bio-section p {
-  color: #666;
+  color: var(--text-color);
   line-height: 1.8;
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
@@ -319,7 +319,7 @@ export default defineComponent({
 
 .skills-section h3 {
   font-size: 1.8rem;
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 2rem;
   text-align: center;
   position: relative;
@@ -334,7 +334,7 @@ export default defineComponent({
   transform: translateX(-50%);
   width: 50px;
   height: 3px;
-  background: linear-gradient(90deg, #3498db, #2ecc71);
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
   border-radius: 2px;
 }
 
@@ -345,22 +345,22 @@ export default defineComponent({
 }
 
 .skill-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--card-bg-color);
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: var(--card-shadow);
   transition: all 0.3s ease;
-  border: 1px solid rgba(52, 152, 219, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .skill-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-  border-color: rgba(52, 152, 219, 0.3);
+  border-color: var(--hover-border-color);
 }
 
 .skill-card h4 {
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 1rem;
   font-size: 1.3rem;
   position: relative;
@@ -374,12 +374,12 @@ export default defineComponent({
   left: 0;
   width: 30px;
   height: 2px;
-  background: linear-gradient(90deg, #3498db, #2ecc71);
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
   border-radius: 2px;
 }
 
 .skill-card p {
-  color: #666;
+  color: var(--text-color);
   line-height: 1.6;
   font-size: 1rem;
 }
@@ -391,7 +391,7 @@ export default defineComponent({
 
 .timeline-section h3 {
   font-size: 1.8rem;
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 2rem;
   text-align: center;
   position: relative;
@@ -406,7 +406,7 @@ export default defineComponent({
   transform: translateX(-50%);
   width: 50px;
   height: 3px;
-  background: linear-gradient(90deg, #3498db, #2ecc71);
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
   border-radius: 2px;
 }
 
@@ -421,7 +421,7 @@ export default defineComponent({
   content: '';
   position: absolute;
   width: 3px;
-  background: linear-gradient(to bottom, #3498db, #2ecc71);
+  background: linear-gradient(to bottom, var(--accent-color), var(--accent-secondary));
   top: 0;
   bottom: 0;
   left: 50%;
@@ -446,54 +446,54 @@ export default defineComponent({
 }
 
 .timeline-entry.current .timeline-content {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(52, 152, 219, 0.1));
-  border: 2px solid #3498db;
-  box-shadow: 0 15px 35px rgba(52, 152, 219, 0.2);
+  background: linear-gradient(135deg, var(--card-bg-color), rgba(52, 152, 219, 0.1));
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   animation: glowPulse 2s infinite;
 }
 
 @keyframes glowPulse {
   0% {
-    box-shadow: 0 15px 35px rgba(52, 152, 219, 0.2);
-    border-color: #3498db;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent-color);
   }
   50% {
-    box-shadow: 0 15px 35px rgba(52, 152, 219, 0.4),
-                0 0 20px rgba(52, 152, 219, 0.4),
-                0 0 30px rgba(52, 152, 219, 0.2);
-    border-color: #2ecc71;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent-secondary);
   }
   100% {
-    box-shadow: 0 15px 35px rgba(52, 152, 219, 0.2);
-    border-color: #3498db;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent-color);
   }
 }
 
 .timeline-entry.current .timeline-dot {
   width: 25px;
   height: 25px;
-  background: linear-gradient(45deg, #3498db, #2ecc71);
-  box-shadow: 0 0 20px rgba(52, 152, 219, 0.8);
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-secondary));
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
   animation: dotPulse 2s infinite;
 }
 
 @keyframes dotPulse {
   0% {
     transform: translateY(-50%) scale(1);
-    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4);
   }
   50% {
     transform: translateY(-50%) scale(1.2);
-    box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
   }
   100% {
     transform: translateY(-50%) scale(1);
-    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
 }
 
 .timeline-entry.current .timeline-date {
-  color: #3498db;
+  color: var(--accent-color);
   font-weight: bold;
   font-size: 1.1rem;
   animation: textGlow 2s infinite;
@@ -501,19 +501,19 @@ export default defineComponent({
 
 @keyframes textGlow {
   0% {
-    text-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
   50% {
-    text-shadow: 0 0 10px rgba(52, 152, 219, 0.4),
-                 0 0 20px rgba(52, 152, 219, 0.2);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.4),
+                 0 0 20px rgba(0, 0, 0, 0.2);
   }
   100% {
-    text-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
 }
 
 .timeline-entry.current h4 {
-  background: linear-gradient(45deg, #2c3e50, #3498db);
+  background: linear-gradient(45deg, var(--text-color), var(--accent-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 1.4rem;
@@ -525,7 +525,7 @@ export default defineComponent({
     filter: brightness(1);
   }
   50% {
-    filter: brightness(1.2) drop-shadow(0 0 8px rgba(52, 152, 219, 0.4));
+    filter: brightness(1.2) drop-shadow(0 0 8px rgba(var(--accent-color), 0.4));
   }
   100% {
     filter: brightness(1);
@@ -535,19 +535,19 @@ export default defineComponent({
 .timeline-dot {
   width: 20px;
   height: 20px;
-  background: linear-gradient(45deg, #3498db, #2ecc71);
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-secondary));
   border-radius: 50%;
   position: absolute;
   right: -10px;
   top: 50%;
   transform: translateY(-50%);
-  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+  box-shadow: 0 0 10px rgba(var(--accent-color), 0.5);
   transition: all 0.3s ease;
 }
 
 .timeline-entry:hover .timeline-dot {
   transform: translateY(-50%) scale(1.2);
-  box-shadow: 0 0 20px rgba(52, 152, 219, 0.8);
+  box-shadow: 0 0 20px rgba(var(--accent-color), 0.8);
 }
 
 .timeline-entry.right .timeline-dot {
@@ -555,35 +555,35 @@ export default defineComponent({
 }
 
 .timeline-content {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--card-bg-color);
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: var(--card-shadow);
   transition: all 0.3s ease;
-  border: 1px solid rgba(52, 152, 219, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .timeline-content:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-  border-color: rgba(52, 152, 219, 0.3);
+  border-color: var(--hover-border-color);
 }
 
 .timeline-content h4 {
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
 }
 
 .timeline-date {
-  color: #3498db;
+  color: var(--accent-color);
   font-size: 1rem;
   margin-bottom: 1rem;
   font-weight: 500;
 }
 
 .timeline-description {
-  color: #666;
+  color: var(--text-color);
   line-height: 1.6;
   font-size: 1rem;
 }
@@ -603,7 +603,7 @@ export default defineComponent({
 }
 
 .modal-content {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-bg-color);
   padding: 2.5rem;
   border-radius: 20px;
   max-width: 600px;
@@ -611,8 +611,8 @@ export default defineComponent({
   max-height: 80vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-  border: 1px solid rgba(52, 152, 219, 0.2);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
   animation: modalFadeIn 0.3s ease;
 }
 
@@ -635,7 +635,7 @@ export default defineComponent({
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
-  color: #666;
+  color: var(--text-color);
   transition: all 0.3s ease;
   width: 40px;
   height: 40px;
@@ -647,19 +647,19 @@ export default defineComponent({
 
 .close-button:hover {
   background: rgba(0,0,0,0.1);
-  color: #2c3e50;
+  color: var(--text-color);
   transform: rotate(90deg);
 }
 
 .modal-date {
-  color: #3498db;
+  color: var(--accent-color);
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
   font-weight: 500;
 }
 
 .modal-description {
-  color: #666;
+  color: var(--text-color);
   line-height: 1.8;
   font-size: 1.1rem;
 }
@@ -677,7 +677,7 @@ export default defineComponent({
 
 .modal-description li::before {
   content: '•';
-  color: #3498db;
+  color: var(--accent-color);
   position: absolute;
   left: 0;
   font-size: 1.2rem;
@@ -853,18 +853,18 @@ export default defineComponent({
 
   @keyframes glowPulse {
     0% {
-      box-shadow: 0 10px 25px rgba(52, 152, 219, 0.2);
-      border-color: #3498db;
+      box-shadow: 0 10px 25px rgba(var(--accent-color), 0.2);
+      border-color: var(--accent-color);
     }
     50% {
-      box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3),
-                  0 0 15px rgba(52, 152, 219, 0.3),
-                  0 0 20px rgba(52, 152, 219, 0.2);
-      border-color: #2ecc71;
+      box-shadow: 0 10px 25px rgba(var(--accent-color), 0.3),
+                  0 0 15px rgba(var(--accent-color), 0.3),
+                  0 0 20px rgba(var(--accent-color), 0.2);
+      border-color: var(--accent-secondary);
     }
     100% {
-      box-shadow: 0 10px 25px rgba(52, 152, 219, 0.2);
-      border-color: #3498db;
+      box-shadow: 0 10px 25px rgba(var(--accent-color), 0.2);
+      border-color: var(--accent-color);
     }
   }
 
@@ -875,15 +875,15 @@ export default defineComponent({
   @keyframes dotPulse {
     0% {
       transform: translateY(-50%) scale(1);
-      box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.3);
+      box-shadow: 0 0 0 0 rgba(var(--accent-color), 0.3);
     }
     50% {
       transform: translateY(-50%) scale(1.1);
-      box-shadow: 0 0 0 8px rgba(52, 152, 219, 0);
+      box-shadow: 0 0 0 8px rgba(var(--accent-color), 0);
     }
     100% {
       transform: translateY(-50%) scale(1);
-      box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+      box-shadow: 0 0 0 0 rgba(var(--accent-color), 0);
     }
   }
 }
