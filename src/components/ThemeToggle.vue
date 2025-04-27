@@ -23,7 +23,6 @@
         <path d="M12 2a9.96 9.96 0 0 0-7.071 2.929 9.96 9.96 0 0 0 0 14.142 9.96 9.96 0 0 0 14.142 0 9.96 9.96 0 0 0 0-14.142A9.96 9.96 0 0 0 12 2z" />
         <path d="M12 2v20" />
         <path d="M2 12h20" />
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
         <path d="M12 6a6 6 0 0 0 0 12" />
       </svg>
       <span class="theme-name">{{ getThemeName() }}</span>
@@ -68,17 +67,19 @@ export default defineComponent({
   justify-content: center;
   margin-left: 1rem;
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 0.5rem;
-  border-radius: 10px;
-  min-width: 2.5rem;
-  height: 2.5rem;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  height: 100%;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .theme-toggle:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+  background-color: var(--nav-hover-bg);
 }
 
 .theme-icon {
@@ -86,12 +87,14 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   color: var(--nav-text-color);
+  pointer-events: none;
 }
 
 .icon {
   width: 1.25rem;
   height: 1.25rem;
   stroke: var(--nav-text-color);
+  pointer-events: none;
 }
 
 .theme-name {
@@ -100,5 +103,6 @@ export default defineComponent({
   color: var(--nav-text-color);
   font-weight: bold;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
 }
 </style> 

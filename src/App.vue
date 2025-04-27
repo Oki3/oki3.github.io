@@ -44,6 +44,7 @@ export default defineComponent({
   --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   --nav-bg-color: #2c3e50;
   --nav-text-color: white;
+  --nav-hover-bg: #34495e;
   --footer-bg-color: #2c3e50;
   --footer-text-color: white;
   --accent-color: #3498db;
@@ -59,6 +60,7 @@ export default defineComponent({
   --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   --nav-bg-color: #1a1a1a;
   --nav-text-color: #e0e0e0;
+  --nav-hover-bg: #2a2a2a;
   --footer-bg-color: #1a1a1a;
   --footer-text-color: #e0e0e0;
   --accent-color: #64b5f6;
@@ -149,7 +151,7 @@ body {
 }
 
 .nav-link:hover {
-  background-color: #34495e;
+  background-color: var(--nav-hover-bg);
 }
 
 .nav-link.router-link-active {
