@@ -1,6 +1,6 @@
 # Vue.js Blog Template
 
-A modern blog template built with Vue.js and TypeScript.
+A modern blog built with Vue.js and TypeScript.
 
 ## Features
 
@@ -30,7 +30,11 @@ cd vue-blog-template
 
 2. Build and start the Docker container:
 ```bash
-docker-compose up -d
+# Build the Docker image
+./docker-scripts.sh build
+
+# Start the container
+./docker-scripts.sh start
 ```
 
 3. Access the application at:
@@ -38,13 +42,34 @@ docker-compose up -d
 http://localhost:426
 ```
 
+### Stopping the Container
+
+To stop the running container:
+```bash
+./docker-scripts.sh stop
+```
+
 ### Development
 
-For development, you can use the following command to run the application locally:
+For development, you can use the following commands to run the application locally:
 
 ```bash
+# Install dependencies
 npm install
+
+# Run development server
 npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build locally
+npm run preview
+```
+
+The development server will be available at:
+```
+http://localhost:5173
 ```
 
 ## Project Structure
