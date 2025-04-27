@@ -96,6 +96,10 @@ body {
   justify-content: space-between;
   align-items: center;
   transition: background-color 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .nav-brand {
@@ -148,6 +152,10 @@ body {
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: background-color 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .nav-link:hover {

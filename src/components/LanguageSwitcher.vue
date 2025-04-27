@@ -93,10 +93,10 @@ onUnmounted(() => {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  border: 2px solid #3498db;
+  border: 2px solid var(--accent-color);
   border-radius: 20px;
   background: none;
-  color: #3498db;
+  color: var(--nav-text-color);
   transition: all 0.3s ease;
   font-size: 0.9rem;
   user-select: none;
@@ -107,9 +107,8 @@ onUnmounted(() => {
 }
 
 .selected-language:hover {
-  background-color: rgba(52, 152, 219, 0.1);
+  background-color: var(--nav-hover-bg);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
 }
 
 .language-flag {
@@ -127,9 +126,9 @@ onUnmounted(() => {
   top: 100%;
   right: 0;
   margin-top: 0.5rem;
-  background: white;
+  background: var(--card-bg-color);
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   overflow: hidden;
   z-index: 1000;
   min-width: 150px;
@@ -152,7 +151,7 @@ onUnmounted(() => {
   align-items: center;
   gap: 0.5rem;
   padding: 0.8rem 1rem;
-  color: #2c3e50;
+  color: var(--text-color);
   transition: all 0.3s ease;
   user-select: none;
   -webkit-user-select: none;
@@ -161,12 +160,12 @@ onUnmounted(() => {
 }
 
 .language-option:hover {
-  background-color: rgba(52, 152, 219, 0.1);
+  background-color: var(--nav-hover-bg);
 }
 
 .language-option.active {
   background-color: rgba(52, 152, 219, 0.2);
-  color: #3498db;
+  color: var(--accent-color);
   font-weight: 500;
 }
 </style> 
