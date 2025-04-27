@@ -44,8 +44,40 @@ export default defineComponent({
 
 .nav-brand {
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(45deg, #fff, #3498db);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative;
+  padding: 0.5rem 1rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-brand::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-brand:hover {
+  transform: translateY(-2px);
+}
+
+.nav-brand:hover::after {
+  transform: scaleX(1);
 }
 
 .nav-links {

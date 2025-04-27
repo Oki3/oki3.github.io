@@ -113,17 +113,30 @@ export default defineComponent({
       ] as Skill[],
       timelineEntries: [
         {
-          title: 'Started Programming Journey',
-          date: '2018',
-          shortDescription: 'Began learning web development fundamentals',
+          title: 'Current Position',
+          date: '2024',
+          shortDescription: 'Senior Full Stack Developer',
           fullDescription: `
-            <p>My journey in programming began with a deep curiosity about how websites work. 
-            I started with HTML and CSS, gradually moving on to JavaScript and modern frameworks.</p>
-            <p>Key milestones:</p>
+            <p>Currently working as a Senior Full Stack Developer, leading development teams and architecting modern web applications.</p>
+            <p>Current focus:</p>
             <ul>
-              <li>Completed online courses in web development</li>
-              <li>Built my first personal website</li>
-              <li>Joined coding communities and forums</li>
+              <li>Leading development of enterprise applications</li>
+              <li>Mentoring junior developers</li>
+              <li>Implementing cutting-edge technologies</li>
+            </ul>
+          `
+        },
+        {
+          title: 'Advanced Studies',
+          date: '2020',
+          shortDescription: 'Completed Advanced Web Development Certification',
+          fullDescription: `
+            <p>Pursued advanced studies in web development to enhance my skills.</p>
+            <p>Achievements:</p>
+            <ul>
+              <li>Mastered Vue.js and React</li>
+              <li>Learned advanced TypeScript concepts</li>
+              <li>Studied software architecture patterns</li>
             </ul>
           `
         },
@@ -142,16 +155,17 @@ export default defineComponent({
           `
         },
         {
-          title: 'Advanced Studies',
-          date: '2020',
-          shortDescription: 'Completed Advanced Web Development Certification',
+          title: 'Started Programming Journey',
+          date: '2018',
+          shortDescription: 'Began learning web development fundamentals',
           fullDescription: `
-            <p>Pursued advanced studies in web development to enhance my skills.</p>
-            <p>Achievements:</p>
+            <p>My journey in programming began with a deep curiosity about how websites work. 
+            I started with HTML and CSS, gradually moving on to JavaScript and modern frameworks.</p>
+            <p>Key milestones:</p>
             <ul>
-              <li>Mastered Vue.js and React</li>
-              <li>Learned advanced TypeScript concepts</li>
-              <li>Studied software architecture patterns</li>
+              <li>Completed online courses in web development</li>
+              <li>Built my first personal website</li>
+              <li>Joined coding communities and forums</li>
             </ul>
           `
         }
