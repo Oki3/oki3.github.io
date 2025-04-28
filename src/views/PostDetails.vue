@@ -2,19 +2,17 @@
   <div class="post-details" v-if="post">
     <section class="post-header" :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${post.image})` }">
       <div class="container">
-        <h1 :class="['animate-fade-in', { 'animate-reset': shouldAnimate }]">{{ $t(post.titleKey) }}</h1>
+        <h1 :class="['animate-fade-in', { 'animate-reset': shouldAnimate }]">{{ post.title }}</h1>
         <div class="post-meta" :class="['animate-fade-in-delay', { 'animate-reset': shouldAnimate }]">
           <span class="date">{{ post.date }}</span>
-          <span class="category">{{ $t(post.categoryKey) }}</span>
+          <span class="category">{{ post.category }}</span>
         </div>
       </div>
     </section>
     
     <section class="post-content-wrapper">
       <article class="post-content" :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">
-        <div class="post-body">
-          <p v-for="(paragraph, index) in postContent" :key="index" class="paragraph">{{ paragraph }}</p>
-        </div>
+        <div class="post-body" v-html="post.html"></div>
         
         <div class="post-tags">
           <span class="tag-label">Tags:</span>
@@ -26,13 +24,13 @@
         <div class="post-navigation">
           <router-link v-if="prevPost" :to="`/posts/${prevPost.slug}`" class="nav-link prev">
             <span class="nav-direction">← Previous</span>
-            <span class="nav-title">{{ $t(prevPost.titleKey) }}</span>
+            <span class="nav-title">{{ prevPost.title }}</span>
           </router-link>
           <div v-else class="nav-link empty"></div>
           
           <router-link v-if="nextPost" :to="`/posts/${nextPost.slug}`" class="nav-link next">
             <span class="nav-direction">Next →</span>
-            <span class="nav-title">{{ $t(nextPost.titleKey) }}</span>
+            <span class="nav-title">{{ nextPost.title }}</span>
           </router-link>
           <div v-else class="nav-link empty"></div>
         </div>
@@ -41,10 +39,10 @@
       <aside class="sidebar" :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">
         <div class="related-posts">
           <h3>Related Posts</h3>
-          <div class="related-post" v-for="relatedPost in relatedPosts" :key="relatedPost.id" @click="navigateToPost(relatedPost.slug)">
-            <img :src="relatedPost.image" :alt="$t(relatedPost.titleKey)" class="related-image">
+          <div class="related-post" v-for="relatedPost in relatedPosts" :key="relatedPost.slug" @click="navigateToPost(relatedPost.slug)">
+            <img :src="relatedPost.image" :alt="relatedPost.title" class="related-image">
             <div class="related-content">
-              <h4>{{ $t(relatedPost.titleKey) }}</h4>
+              <h4>{{ relatedPost.title }}</h4>
               <span class="related-date">{{ relatedPost.date }}</span>
             </div>
           </div>
@@ -64,18 +62,8 @@ import { defineComponent, computed, ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useAnimation } from '@/composables/useAnimation'
+import { getPostBySlug, getRelatedPosts, getAllPosts, Post } from '@/utils/posts'
 import '@/assets/styles/animations.css'
-
-interface Post {
-  id: number
-  titleKey: string
-  excerptKey: string
-  image: string
-  date: string
-  categoryKey: string
-  slug: string
-  tags?: string[]
-}
 
 export default defineComponent({
   name: 'PostDetails',
@@ -85,67 +73,13 @@ export default defineComponent({
     const { t } = useI18n()
     const { shouldAnimate } = useAnimation()
     
-    // Simulate a posts database
-    const allPosts = ref<Post[]>([
-      {
-        id: 1,
-        titleKey: 'home.featured.posts.vue.title',
-        excerptKey: 'home.featured.posts.vue.excerpt',
-        image: 'https://picsum.photos/1200/600',
-        date: 'April 27, 2024',
-        categoryKey: 'home.featured.posts.vue.category',
-        slug: 'getting-started-with-vue-3',
-        tags: ['Vue', 'Frontend', 'JavaScript']
-      },
-      {
-        id: 2,
-        titleKey: 'home.featured.posts.typescript.title',
-        excerptKey: 'home.featured.posts.typescript.excerpt',
-        image: 'https://picsum.photos/1200/601',
-        date: 'April 26, 2024',
-        categoryKey: 'home.featured.posts.typescript.category',
-        slug: 'typescript-best-practices',
-        tags: ['TypeScript', 'JavaScript', 'Development']
-      },
-      {
-        id: 3,
-        titleKey: 'home.featured.posts.webdev.title',
-        excerptKey: 'home.featured.posts.webdev.excerpt',
-        image: 'https://picsum.photos/1200/602',
-        date: 'April 25, 2024',
-        categoryKey: 'home.featured.posts.webdev.category',
-        slug: 'modern-web-development',
-        tags: ['Web Development', 'Frontend', 'Design']
-      },
-      {
-        id: 4,
-        titleKey: 'posts.react.title',
-        excerptKey: 'posts.react.excerpt',
-        image: 'https://picsum.photos/1200/603',
-        date: 'April 24, 2024',
-        categoryKey: 'posts.react.category',
-        slug: 'react-hooks-advanced-guide',
-        tags: ['React', 'Frontend', 'JavaScript']
-      },
-      {
-        id: 5,
-        titleKey: 'posts.css.title',
-        excerptKey: 'posts.css.excerpt',
-        image: 'https://picsum.photos/1200/604',
-        date: 'April 23, 2024',
-        categoryKey: 'posts.css.category',
-        slug: 'css-grid-and-flexbox-mastery',
-        tags: ['CSS', 'Frontend', 'Design']
-      }
-    ]);
-    
-    const post = computed(() => {
-      return allPosts.value.find(p => p.slug === route.params.slug);
-    });
+    const post = ref<Post | null>(null)
+    const relatedPosts = ref<Post[]>([])
+    const allPosts = ref<Post[]>([])
     
     const currentIndex = computed(() => {
       if (!post.value) return -1;
-      return allPosts.value.findIndex(p => p.id === post.value?.id);
+      return allPosts.value.findIndex(p => p.slug === post.value?.slug);
     });
     
     const prevPost = computed(() => {
@@ -158,38 +92,27 @@ export default defineComponent({
       return allPosts.value[currentIndex.value + 1];
     });
     
-    const relatedPosts = computed(() => {
-      if (!post.value) return [];
-      
-      // Get posts with similar tags
-      return allPosts.value
-        .filter(p => p.id !== post.value?.id && p.tags?.some(tag => post.value?.tags?.includes(tag)))
-        .slice(0, 3);
-    });
-    
-    // Simulate content paragraphs
-    const postContent = ref([
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl ac ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl. Nullam auctor, nisl ac ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl.",
-      "Suspendisse potenti. Etiam euismod, nisl eget ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl. Nullam auctor, nisl ac ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl.",
-      "Phasellus euismod, nisl eget ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl. Nullam auctor, nisl ac ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl.",
-      "Maecenas euismod, nisl eget ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl. Nullam auctor, nisl ac ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl.",
-      "Curabitur euismod, nisl eget ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl. Nullam auctor, nisl ac ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl."
-    ]);
-    
     const navigateToPost = (slug: string) => {
       router.push({ name: 'post-details', params: { slug } });
     };
     
-    onMounted(() => {
+    onMounted(async () => {
+      const slug = route.params.slug as string;
+      post.value = await getPostBySlug(slug);
+      
+      if (post.value) {
+        relatedPosts.value = await getRelatedPosts(post.value);
+        allPosts.value = await getAllPosts();
+      }
+      
       window.scrollTo(0, 0);
     });
     
     return {
       post,
-      postContent,
+      relatedPosts,
       prevPost,
       nextPost,
-      relatedPosts,
       navigateToPost,
       shouldAnimate
     };
