@@ -162,17 +162,20 @@ export default defineComponent({
 .projects {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
 }
 
 .projects-header {
   text-align: center;
-  margin-bottom: 4rem;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 3rem;
+  overflow: hidden;
 }
 
 .projects-header h1 {
   font-size: 2.5rem;
-  color: #2c3e50;
   margin-bottom: 1rem;
   opacity: 0;
   transform: translateY(20px);
@@ -180,32 +183,34 @@ export default defineComponent({
 
 .projects-header p {
   font-size: 1.2rem;
-  color: #666;
   opacity: 0;
   transform: translateY(20px);
 }
 
 .filters {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 3rem;
   flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  justify-content: center;
 }
 
 .filter-btn {
-  padding: 0.5rem 1.5rem;
-  border: 2px solid #3498db;
+  background-color: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
   border-radius: 20px;
-  background: none;
-  color: #3498db;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.filter-btn:hover,
+.filter-btn:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
 .filter-btn.active {
-  background-color: #3498db;
+  background-color: var(--accent-color);
   color: white;
 }
 
@@ -216,11 +221,11 @@ export default defineComponent({
 }
 
 .project-card {
-  background: white;
+  background: var(--card-bg-color);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
   opacity: 0;
   transform: translateY(30px);
 }
@@ -246,12 +251,12 @@ export default defineComponent({
 }
 
 .project-content h2 {
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 1rem;
 }
 
 .project-content p {
-  color: #666;
+  color: var(--text-color);
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
@@ -264,8 +269,8 @@ export default defineComponent({
 }
 
 .tag {
-  background: #f0f2f5;
-  color: #2c3e50;
+  background: rgba(52, 152, 219, 0.1);
+  color: var(--accent-color);
   padding: 0.25rem 0.75rem;
   border-radius: 15px;
   font-size: 0.9rem;
