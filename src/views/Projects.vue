@@ -2,6 +2,7 @@
   <div class="projects">
     <section class="projects-header">
       <h1 :class="['animate-fade-in', { 'animate-reset': shouldAnimate }]">{{ t('projects.title') }}</h1>
+      <p :class="['animate-fade-in', { 'animate-reset': shouldAnimate }]">{{ $t('projects.subtitle') }}</p>
     </section>
 
     <section class="projects-content">

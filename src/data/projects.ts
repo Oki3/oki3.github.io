@@ -8,18 +8,18 @@ export const allProjects: Project[] = [
     image: 'https://picsum.photos/600/403',
     tags: ['Vue.js', 'TypeScript'],
     links: [
-      { type: 'github', text: 'View Code', url: 'https://github.com/example/portfolio' },
-      { type: 'demo', text: 'Live Demo', url: 'https://portfolio-demo.com' }
+      { type: 'github', text: 'View Code', url: 'https://github.com/Oki3/oki3.github.io' },
+      { type: 'demo', text: 'Live Demo', url: 'https://oki3.github.io' }
     ]
   },
   {
     id: 3,
-    title: 'ML Image Classifier',
-    description: 'Machine learning model for image classification using Python',
+    title: 'VS Code Extension: Commit Message Generator using LLM',
+    description: 'A VS Code plugin that generates commit messages using ollama',
     image: 'https://picsum.photos/600/402',
-    tags: ['Python', 'Machine Learning', 'TensorFlow'],
+    tags: ['Python', 'Machine Learning'],
     links: [
-      { type: 'github', text: 'View Code', url: 'https://github.com/example/ml-classifier' }
+      { type: 'github', text: 'View Code', url: 'https://github.com/Oki3/commit_message_generation_extension' }
     ]
   },
   {
@@ -36,9 +36,9 @@ export const allProjects: Project[] = [
   {
     id: 1,
     title: 'E-Commerce Platform',
-    description: 'A full-stack e-commerce platform with Vue.js and Node.js',
+    description: 'A practice project of a full-stack e-commerce platform with Spring Boot and Vue.js',
     image: 'https://picsum.photos/600/400',
-    tags: ['Vue.js', 'Node.js', 'TypeScript'],
+    tags: ['Vue.js', 'Java', 'TypeScript'],
     links: [
       { type: 'github', text: 'View Code', url: 'https://github.com/example/ecommerce' },
       { type: 'demo', text: 'Live Demo', url: 'https://ecommerce-demo.com' }
