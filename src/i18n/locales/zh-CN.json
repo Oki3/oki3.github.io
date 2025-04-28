@@ -62,24 +62,28 @@
       }
     }
   },
+  "projects":{
+    "title": "项目",
+    "subtitle": "我迄今为止的一些项目。我主要用Python中实现AI/机器学习相关的研究项目，以及根据需求选择开发小型应用程序和工具。"
+  },
   "contact": {
     "header": {
       "title": "联系我",
-      "subtitle": "欢迎联系我进行合作或只是打个招呼"
+      "subtitle": "只是想打个招呼也可以！"
     },
     "info": {
       "title": "联系方式",
       "email": {
         "title": "邮箱",
-        "value": "hello@example.com"
+        "value": "weichenghu2002@hotmail.com"
       },
       "location": {
         "title": "位置",
-        "value": "旧金山，加利福尼亚"
+        "value": "代尔夫特，荷兰"
       },
       "work": {
         "title": "工作",
-        "value": "接受自由职业项目"
+        "value": "目前寻找实习/初级开发岗位"
       }
     },
     "social": {

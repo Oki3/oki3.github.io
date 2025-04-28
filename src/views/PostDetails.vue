@@ -13,7 +13,13 @@
     <section class="post-content-wrapper">
       <article class="post-content" :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">
         <div class="post-body">
-          <p v-for="(paragraph, index) in postContent" :key="index" class="paragraph">{{ paragraph }}</p>
+          <div v-for="(block, index) in post.content" :key="index" class="content-block">
+            <p v-if="block.type === 'text'" class="paragraph">{{ block.content }}</p>
+            <figure v-else-if="block.type === 'image'" class="post-image-container">
+              <img :src="block.content" :alt="block.alt" class="post-image">
+              <figcaption v-if="block.caption" class="image-caption">{{ block.caption }}</figcaption>
+            </figure>
+          </div>
         </div>
         
         <div class="post-tags">
@@ -65,7 +71,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useAnimation } from '@/composables/useAnimation'
 import '@/assets/styles/animations.css'
-import { allPosts, postContent } from '@/data/posts'
+import { allPosts } from '@/data/posts'
 import { Post } from '@/types/post'
 
 export default defineComponent({
@@ -114,7 +120,6 @@ export default defineComponent({
     
     return {
       post,
-      postContent,
       prevPost,
       nextPost,
       relatedPosts,
@@ -190,6 +195,10 @@ export default defineComponent({
 }
 
 .post-body {
+  margin-bottom: 2rem;
+}
+
+.content-block {
   margin-bottom: 2rem;
 }
 
@@ -347,6 +356,25 @@ export default defineComponent({
 .back-link:hover {
   background-color: #2980b9;
   transform: translateY(-3px);
+}
+
+.post-image-container {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.post-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+}
+
+.image-caption {
+  margin-top: 1rem;
+  color: var(--text-color);
+  font-style: italic;
+  font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {
