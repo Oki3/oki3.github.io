@@ -6,51 +6,22 @@
     </section>
     
     <section class="featured-posts">
-      <div class="section-header">
-        <h2 :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">{{ $t('home.featured.title') }}</h2>
-        <router-link to="/posts" class="view-all">View All ></router-link>
-      </div>
+      <h2 :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">{{ $t('home.featured.title') }}</h2>
       <div class="posts-grid">
         <article 
           v-for="(post, index) in featuredPosts" 
-          :key="post.slug" 
+          :key="post.id" 
           :class="['post-card', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
           :style="{ animationDelay: `${index * 0.2}s` }"
           @click="viewPost(post)"
         >
-          <img :src="post.image" :alt="post.title" class="post-image">
+          <img :src="post.image" :alt="$t(post.titleKey)" class="post-image">
           <div class="post-content">
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.excerpt }}</p>
+            <h3>{{ $t(post.titleKey) }}</h3>
+            <p>{{ $t(post.excerptKey) }}</p>
             <div class="post-meta">
               <span class="date">{{ post.date }}</span>
-              <span class="category">{{ post.category }}</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-    
-    <section class="featured-projects">
-      <div class="section-header">
-        <h2 :class="['animate-slide-up', { 'animate-reset': shouldAnimate }]">Featured Projects</h2>
-        <router-link to="/projects" class="view-all">View All ></router-link>
-      </div>
-      <div class="projects-grid">
-        <article 
-          v-for="(project, index) in featuredProjects" 
-          :key="project.slug" 
-          :class="['project-card', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
-          :style="{ animationDelay: `${index * 0.2}s` }"
-          @click="viewProject(project)"
-        >
-          <img :src="project.image" :alt="project.title" class="project-image">
-          <div class="project-content">
-            <h3>{{ project.title }}</h3>
-            <p>{{ project.excerpt }}</p>
-            <div class="project-meta">
-              <span class="date">{{ project.date }}</span>
-              <span class="category">{{ project.category }}</span>
+              <span class="category">{{ $t(post.categoryKey) }}</span>
             </div>
           </div>
         </article>
@@ -60,19 +31,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { useAnimation } from '@/composables/useAnimation'
-import { getAllPosts, Post } from '@/utils/posts'
 import '@/assets/styles/animations.css'
 
-interface Project {
-  title: string
-  date: string
-  category: string
+interface Post {
+  id: number
+  titleKey: string
+  excerptKey: string
   image: string
-  excerpt: string
+  date: string
+  categoryKey: string
   slug: string
 }
 
@@ -82,41 +53,44 @@ export default defineComponent({
     const { t } = useI18n()
     const router = useRouter()
     const { shouldAnimate } = useAnimation()
-    const featuredPosts = ref<Post[]>([])
-    const featuredProjects = ref<Project[]>([])
     
     const viewPost = (post: Post) => {
       router.push({ name: 'post-details', params: { slug: post.slug } });
     };
 
-    const viewProject = (project: Project) => {
-      router.push({ name: 'project-details', params: { slug: project.slug } });
-    };
-
-    const fetchProjects = async () => {
-      try {
-        // TODO: Replace with actual API call
-        const response = await fetch('/api/projects')
-        const allProjects = await response.json()
-        featuredProjects.value = allProjects.slice(0, 3)
-      } catch (error) {
-        console.error('Error fetching projects:', error)
-      }
-    };
-
-    onMounted(async () => {
-      const allPosts = await getAllPosts();
-      featuredPosts.value = allPosts.slice(0, 3);
-      fetchProjects();
-    });
-
-    return { 
-      t, 
-      shouldAnimate, 
-      viewPost,
-      viewProject,
-      featuredPosts,
-      featuredProjects
+    return { t, shouldAnimate, viewPost }
+  },
+  data() {
+    return {
+      featuredPosts: [
+        {
+          id: 1,
+          titleKey: 'home.featured.posts.vue.title',
+          excerptKey: 'home.featured.posts.vue.excerpt',
+          image: 'https://picsum.photos/400/250',
+          date: 'April 27, 2024',
+          categoryKey: 'home.featured.posts.vue.category',
+          slug: 'getting-started-with-vue-3'
+        },
+        {
+          id: 2,
+          titleKey: 'home.featured.posts.typescript.title',
+          excerptKey: 'home.featured.posts.typescript.excerpt',
+          image: 'https://picsum.photos/400/251',
+          date: 'April 26, 2024',
+          categoryKey: 'home.featured.posts.typescript.category',
+          slug: 'typescript-best-practices'
+        },
+        {
+          id: 3,
+          titleKey: 'home.featured.posts.webdev.title',
+          excerptKey: 'home.featured.posts.webdev.excerpt',
+          image: 'https://picsum.photos/400/252',
+          date: 'April 25, 2024',
+          categoryKey: 'home.featured.posts.webdev.category',
+          slug: 'modern-web-development'
+        }
+      ] as Post[]
     }
   }
 })
@@ -188,27 +162,23 @@ export default defineComponent({
   }
 }
 
-.featured-posts,
-.featured-projects {
+.featured-posts {
   padding: 2rem 0;
 }
 
-.featured-posts h2,
-.featured-projects h2 {
+.featured-posts h2 {
   margin-bottom: 2rem;
   font-size: 2rem;
   color: #2c3e50;
 }
 
-.posts-grid,
-.projects-grid {
+.posts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
 }
 
-.post-card,
-.project-card {
+.post-card {
   background: white;
   border-radius: 8px;
   overflow: hidden;
@@ -218,45 +188,38 @@ export default defineComponent({
   cursor: pointer;
 }
 
-.post-card:hover,
-.project-card:hover {
+.post-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.post-image,
-.project-image {
+.post-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.post-card:hover .post-image,
-.project-card:hover .project-image {
+.post-card:hover .post-image {
   transform: scale(1.05);
 }
 
-.post-content,
-.project-content {
+.post-content {
   padding: 1.5rem;
 }
 
-.post-content h3,
-.project-content h3 {
+.post-content h3 {
   margin: 0 0 1rem 0;
   color: #2c3e50;
 }
 
-.post-content p,
-.project-content p {
+.post-content p {
   color: #666;
   margin-bottom: 1rem;
   line-height: 1.6;
 }
 
-.post-meta,
-.project-meta {
+.post-meta {
   display: flex;
   justify-content: space-between;
   color: #888;
@@ -280,23 +243,5 @@ export default defineComponent({
 
 .animate-reset.animate-slide-up {
   transform: translateY(30px);
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.view-all {
-  color: var(--accent-color);
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.view-all:hover {
-  transform: translateX(5px);
 }
 </style> 

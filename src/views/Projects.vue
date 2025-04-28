@@ -8,7 +8,7 @@
     <section class="projects-content">
       <div class="filters">
         <button
-          v-for="tag in availableTags"
+          v-for="tag in tags"
           :key="tag"
           :class="['filter-btn', { active: selectedTags.includes(tag) }]"
           @click="toggleTag(tag)"
@@ -20,14 +20,14 @@
       <div class="projects-grid">
         <article 
           v-for="(project, index) in filteredProjects" 
-          :key="project.slug"
+          :key="project.id"
           :class="['project-card', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
           :style="{ animationDelay: `${index * 0.2}s` }"
         >
           <img :src="project.image" :alt="project.title" class="project-image">
           <div class="project-content">
             <h2>{{ project.title }}</h2>
-            <p>{{ project.excerpt }}</p>
+            <p>{{ project.description }}</p>
             <div class="project-tags">
               <span 
                 v-for="(tag, tagIndex) in project.tags" 
@@ -39,20 +39,13 @@
             </div>
             <div class="project-links">
               <a 
-                v-if="project.github"
-                :href="project.github"
-                class="project-link github"
+                v-for="(link, linkIndex) in project.links" 
+                :key="linkIndex"
+                :href="link.url"
+                :class="['project-link', link.type]"
                 target="_blank"
               >
-                View Code
-              </a>
-              <a 
-                v-if="project.demo"
-                :href="project.demo"
-                class="project-link demo"
-                target="_blank"
-              >
-                Live Demo
+                {{ link.text }}
               </a>
             </div>
           </div>
@@ -63,59 +56,103 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAnimation } from '@/composables/useAnimation'
-import { ProjectManager, Project } from '@/utils/projects'
 import '@/assets/styles/animations.css'
+
+interface ProjectLink {
+  type: string
+  text: string
+  url: string
+}
+
+interface Project {
+  id: number
+  title: string
+  description: string
+  image: string
+  tags: string[]
+  links: ProjectLink[]
+}
 
 export default defineComponent({
   name: 'Projects',
   setup() {
     const { t } = useI18n()
     const { shouldAnimate } = useAnimation()
-    const projectManager = ProjectManager.getInstance()
-    const projects = ref<Project[]>([])
-    const selectedTags = ref<string[]>([])
 
-    const availableTags = computed(() => {
-      const tags = new Set<string>()
-      projects.value.forEach(project => {
-        project.tags.forEach(tag => tags.add(tag))
-      })
-      return Array.from(tags).sort()
-    })
-
-    const filteredProjects = computed(() => {
-      if (selectedTags.value.length === 0) {
-        return projects.value
-      }
-      return projects.value.filter(project =>
-        project.tags.some(tag => selectedTags.value.includes(tag))
-      )
-    })
-
-    const toggleTag = (tag: string) => {
-      const index = selectedTags.value.indexOf(tag)
-      if (index === -1) {
-        selectedTags.value.push(tag)
-      } else {
-        selectedTags.value.splice(index, 1)
-      }
+    return { t, shouldAnimate }
+  },
+  data() {
+    return {
+      selectedTags: [] as string[],
+      tags: ['Vue.js', 'TypeScript', 'Node.js', 'React', 'Python', 'Machine Learning'],
+      projects: [
+        {
+          id: 1,
+          title: 'E-Commerce Platform',
+          description: 'A full-stack e-commerce platform with Vue.js and Node.js',
+          image: 'https://picsum.photos/600/400',
+          tags: ['Vue.js', 'Node.js', 'TypeScript'],
+          links: [
+            { type: 'github', text: 'View Code', url: 'https://github.com/example/ecommerce' },
+            { type: 'demo', text: 'Live Demo', url: 'https://ecommerce-demo.com' }
+          ]
+        },
+        {
+          id: 2,
+          title: 'Task Management App',
+          description: 'A collaborative task management application with real-time updates',
+          image: 'https://picsum.photos/600/401',
+          tags: ['Vue.js', 'TypeScript', 'Firebase'],
+          links: [
+            { type: 'github', text: 'View Code', url: 'https://github.com/example/task-manager' },
+            { type: 'demo', text: 'Live Demo', url: 'https://task-manager-demo.com' }
+          ]
+        },
+        {
+          id: 3,
+          title: 'ML Image Classifier',
+          description: 'Machine learning model for image classification using Python',
+          image: 'https://picsum.photos/600/402',
+          tags: ['Python', 'Machine Learning', 'TensorFlow'],
+          links: [
+            { type: 'github', text: 'View Code', url: 'https://github.com/example/ml-classifier' }
+          ]
+        },
+        {
+          id: 4,
+          title: 'Portfolio Website',
+          description: 'Personal portfolio website built with Vue.js and TypeScript',
+          image: 'https://picsum.photos/600/403',
+          tags: ['Vue.js', 'TypeScript'],
+          links: [
+            { type: 'github', text: 'View Code', url: 'https://github.com/example/portfolio' },
+            { type: 'demo', text: 'Live Demo', url: 'https://portfolio-demo.com' }
+          ]
+        }
+      ] as Project[]
     }
-
-    onMounted(async () => {
-      projects.value = await projectManager.getAllProjects()
-    })
-
-    return { 
-      t, 
-      shouldAnimate, 
-      projects,
-      selectedTags,
-      availableTags,
-      filteredProjects,
-      toggleTag
+  },
+  computed: {
+    filteredProjects(): Project[] {
+      if (this.selectedTags.length === 0) {
+        return this.projects
+      }
+      return this.projects.filter(project =>
+        project.tags.some(tag => this.selectedTags.includes(tag))
+      )
+    }
+  },
+  methods: {
+    toggleTag(tag: string) {
+      const index = this.selectedTags.indexOf(tag)
+      if (index === -1) {
+        this.selectedTags.push(tag)
+      } else {
+        this.selectedTags.splice(index, 1)
+      }
     }
   }
 })
@@ -126,7 +163,6 @@ export default defineComponent({
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  user-select: none;
 }
 
 .projects-header {
@@ -187,7 +223,6 @@ export default defineComponent({
   transition: transform 0.3s ease;
   opacity: 0;
   transform: translateY(30px);
-  user-select: none;
 }
 
 .project-card:hover {
@@ -208,7 +243,6 @@ export default defineComponent({
 
 .project-content {
   padding: 1.5rem;
-  user-select: none;
 }
 
 .project-content h2 {
@@ -240,7 +274,6 @@ export default defineComponent({
 .project-links {
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;
 }
 
 .project-link {
@@ -252,12 +285,12 @@ export default defineComponent({
 }
 
 .project-link.github {
-  background-color: #24292e;
+  background: #2c3e50;
   color: white;
 }
 
 .project-link.demo {
-  background-color: #3498db;
+  background: #3498db;
   color: white;
 }
 

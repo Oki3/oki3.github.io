@@ -29,12 +29,6 @@ const router = createRouter({
       meta: { title: 'Projects | Casual & Code' }
     },
     {
-      path: '/projects/:slug',
-      name: 'project-details',
-      component: () => import('../views/ProjectDetails.vue'),
-      meta: { title: 'Project | Casual & Code' }
-    },
-    {
       path: '/contact',
       name: 'contact',
       component: () => import('../views/Contact.vue'),
