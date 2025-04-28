@@ -65,17 +65,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useAnimation } from '@/composables/useAnimation'
 import '@/assets/styles/animations.css'
-
-interface Post {
-  id: number
-  titleKey: string
-  excerptKey: string
-  image: string
-  date: string
-  categoryKey: string
-  slug: string
-  tags?: string[]
-}
+import { allPosts, postContent } from '@/data/posts'
+import { Post } from '@/types/post'
 
 export default defineComponent({
   name: 'PostDetails',
@@ -85,96 +76,33 @@ export default defineComponent({
     const { t } = useI18n()
     const { shouldAnimate } = useAnimation()
     
-    // Simulate a posts database
-    const allPosts = ref<Post[]>([
-      {
-        id: 1,
-        titleKey: 'home.featured.posts.vue.title',
-        excerptKey: 'home.featured.posts.vue.excerpt',
-        image: 'https://picsum.photos/1200/600',
-        date: 'April 27, 2024',
-        categoryKey: 'home.featured.posts.vue.category',
-        slug: 'getting-started-with-vue-3',
-        tags: ['Vue', 'Frontend', 'JavaScript']
-      },
-      {
-        id: 2,
-        titleKey: 'home.featured.posts.typescript.title',
-        excerptKey: 'home.featured.posts.typescript.excerpt',
-        image: 'https://picsum.photos/1200/601',
-        date: 'April 26, 2024',
-        categoryKey: 'home.featured.posts.typescript.category',
-        slug: 'typescript-best-practices',
-        tags: ['TypeScript', 'JavaScript', 'Development']
-      },
-      {
-        id: 3,
-        titleKey: 'home.featured.posts.webdev.title',
-        excerptKey: 'home.featured.posts.webdev.excerpt',
-        image: 'https://picsum.photos/1200/602',
-        date: 'April 25, 2024',
-        categoryKey: 'home.featured.posts.webdev.category',
-        slug: 'modern-web-development',
-        tags: ['Web Development', 'Frontend', 'Design']
-      },
-      {
-        id: 4,
-        titleKey: 'posts.react.title',
-        excerptKey: 'posts.react.excerpt',
-        image: 'https://picsum.photos/1200/603',
-        date: 'April 24, 2024',
-        categoryKey: 'posts.react.category',
-        slug: 'react-hooks-advanced-guide',
-        tags: ['React', 'Frontend', 'JavaScript']
-      },
-      {
-        id: 5,
-        titleKey: 'posts.css.title',
-        excerptKey: 'posts.css.excerpt',
-        image: 'https://picsum.photos/1200/604',
-        date: 'April 23, 2024',
-        categoryKey: 'posts.css.category',
-        slug: 'css-grid-and-flexbox-mastery',
-        tags: ['CSS', 'Frontend', 'Design']
-      }
-    ]);
-    
     const post = computed(() => {
-      return allPosts.value.find(p => p.slug === route.params.slug);
+      return allPosts.find(p => p.slug === route.params.slug);
     });
     
     const currentIndex = computed(() => {
       if (!post.value) return -1;
-      return allPosts.value.findIndex(p => p.id === post.value?.id);
+      return allPosts.findIndex(p => p.id === post.value?.id);
     });
     
     const prevPost = computed(() => {
       if (currentIndex.value <= 0) return null;
-      return allPosts.value[currentIndex.value - 1];
+      return allPosts[currentIndex.value - 1];
     });
     
     const nextPost = computed(() => {
-      if (currentIndex.value === -1 || currentIndex.value >= allPosts.value.length - 1) return null;
-      return allPosts.value[currentIndex.value + 1];
+      if (currentIndex.value === -1 || currentIndex.value >= allPosts.length - 1) return null;
+      return allPosts[currentIndex.value + 1];
     });
     
     const relatedPosts = computed(() => {
       if (!post.value) return [];
       
       // Get posts with similar tags
-      return allPosts.value
+      return allPosts
         .filter(p => p.id !== post.value?.id && p.tags?.some(tag => post.value?.tags?.includes(tag)))
         .slice(0, 3);
     });
-    
-    // Simulate content paragraphs
-    const postContent = ref([
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl ac ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl. Nullam auctor, nisl ac ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl.",
-      "Suspendisse potenti. Etiam euismod, nisl eget ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl. Nullam auctor, nisl ac ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl.",
-      "Phasellus euismod, nisl eget ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl. Nullam auctor, nisl ac ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl.",
-      "Maecenas euismod, nisl eget ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl. Nullam auctor, nisl ac ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl.",
-      "Curabitur euismod, nisl eget ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl. Nullam auctor, nisl ac ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl eu nisl."
-    ]);
     
     const navigateToPost = (slug: string) => {
       router.push({ name: 'post-details', params: { slug } });

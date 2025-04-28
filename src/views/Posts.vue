@@ -46,16 +46,8 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { useAnimation } from '@/composables/useAnimation'
 import '@/assets/styles/animations.css'
-
-interface Post {
-  id: number
-  titleKey: string
-  excerptKey: string
-  image: string
-  date: string
-  categoryKey: string
-  slug: string
-}
+import { allPosts } from '@/data/posts'
+import { Post } from '@/types/post'
 
 export default defineComponent({
   name: 'Posts',
@@ -64,66 +56,18 @@ export default defineComponent({
     const router = useRouter()
     const { shouldAnimate } = useAnimation()
     
-    const posts = ref<Post[]>([
-      {
-        id: 1,
-        titleKey: 'home.featured.posts.vue.title',
-        excerptKey: 'home.featured.posts.vue.excerpt',
-        image: 'https://picsum.photos/400/250',
-        date: 'April 27, 2024',
-        categoryKey: 'home.featured.posts.vue.category',
-        slug: 'getting-started-with-vue-3'
-      },
-      {
-        id: 2,
-        titleKey: 'home.featured.posts.typescript.title',
-        excerptKey: 'home.featured.posts.typescript.excerpt',
-        image: 'https://picsum.photos/400/251',
-        date: 'April 26, 2024',
-        categoryKey: 'home.featured.posts.typescript.category',
-        slug: 'typescript-best-practices'
-      },
-      {
-        id: 3,
-        titleKey: 'home.featured.posts.webdev.title',
-        excerptKey: 'home.featured.posts.webdev.excerpt',
-        image: 'https://picsum.photos/400/252',
-        date: 'April 25, 2024',
-        categoryKey: 'home.featured.posts.webdev.category',
-        slug: 'modern-web-development'
-      },
-      {
-        id: 4,
-        titleKey: 'posts.react.title',
-        excerptKey: 'posts.react.excerpt',
-        image: 'https://picsum.photos/400/253',
-        date: 'April 24, 2024',
-        categoryKey: 'posts.react.category',
-        slug: 'react-hooks-advanced-guide'
-      },
-      {
-        id: 5,
-        titleKey: 'posts.css.title',
-        excerptKey: 'posts.css.excerpt',
-        image: 'https://picsum.photos/400/254',
-        date: 'April 23, 2024',
-        categoryKey: 'posts.css.category',
-        slug: 'css-grid-and-flexbox-mastery'
-      }
-    ]);
-
     const selectedCategory = ref('All');
     
     const categories = computed(() => {
-      const allCategories = posts.value.map(post => t(post.categoryKey));
+      const allCategories = allPosts.map(post => t(post.categoryKey));
       return ['All', ...new Set(allCategories)];
     });
     
     const filteredPosts = computed(() => {
       if (selectedCategory.value === 'All') {
-        return posts.value;
+        return allPosts;
       }
-      return posts.value.filter(post => 
+      return allPosts.filter(post => 
         t(post.categoryKey) === selectedCategory.value
       );
     });
@@ -137,7 +81,6 @@ export default defineComponent({
     };
 
     return {
-      posts,
       categories,
       selectedCategory,
       filteredPosts,

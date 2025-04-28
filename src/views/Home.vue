@@ -36,16 +36,8 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { useAnimation } from '@/composables/useAnimation'
 import '@/assets/styles/animations.css'
-
-interface Post {
-  id: number
-  titleKey: string
-  excerptKey: string
-  image: string
-  date: string
-  categoryKey: string
-  slug: string
-}
+import { allPosts } from '@/data/posts'
+import { Post } from '@/types/post'
 
 export default defineComponent({
   name: 'Home',
@@ -54,44 +46,13 @@ export default defineComponent({
     const router = useRouter()
     const { shouldAnimate } = useAnimation()
     
+    const featuredPosts = allPosts.slice(0, 3);
+    
     const viewPost = (post: Post) => {
       router.push({ name: 'post-details', params: { slug: post.slug } });
     };
 
-    return { t, shouldAnimate, viewPost }
-  },
-  data() {
-    return {
-      featuredPosts: [
-        {
-          id: 1,
-          titleKey: 'home.featured.posts.vue.title',
-          excerptKey: 'home.featured.posts.vue.excerpt',
-          image: 'https://picsum.photos/400/250',
-          date: 'April 27, 2024',
-          categoryKey: 'home.featured.posts.vue.category',
-          slug: 'getting-started-with-vue-3'
-        },
-        {
-          id: 2,
-          titleKey: 'home.featured.posts.typescript.title',
-          excerptKey: 'home.featured.posts.typescript.excerpt',
-          image: 'https://picsum.photos/400/251',
-          date: 'April 26, 2024',
-          categoryKey: 'home.featured.posts.typescript.category',
-          slug: 'typescript-best-practices'
-        },
-        {
-          id: 3,
-          titleKey: 'home.featured.posts.webdev.title',
-          excerptKey: 'home.featured.posts.webdev.excerpt',
-          image: 'https://picsum.photos/400/252',
-          date: 'April 25, 2024',
-          categoryKey: 'home.featured.posts.webdev.category',
-          slug: 'modern-web-development'
-        }
-      ] as Post[]
-    }
+    return { t, shouldAnimate, viewPost, featuredPosts }
   }
 })
 </script>
