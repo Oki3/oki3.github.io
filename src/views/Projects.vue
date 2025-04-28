@@ -1,8 +1,7 @@
 <template>
   <div class="projects">
     <section class="projects-header">
-      <h1 :class="['animate-fade-in', { 'animate-reset': shouldAnimate }]">{{ $t('projects.title') }}</h1>
-      <p :class="['animate-fade-in-delay', { 'animate-reset': shouldAnimate }]">{{ $t('projects.subtitle') }}</p>
+      <h1 :class="['animate-fade-in', { 'animate-reset': shouldAnimate }]">{{ t('projects.title') }}</h1>
     </section>
 
     <section class="projects-content">
@@ -18,141 +17,81 @@
       </div>
 
       <div class="projects-grid">
-        <article 
-          v-for="(project, index) in filteredProjects" 
+        <div
+          v-for="(project, index) in filteredProjects"
           :key="project.id"
           :class="['project-card', 'animate-slide-up', { 'animate-reset': shouldAnimate }]"
           :style="{ animationDelay: `${index * 0.2}s` }"
         >
-          <img :src="project.image" :alt="project.title" class="project-image">
+          <img :src="project.image" :alt="project.title" class="project-image" />
           <div class="project-content">
-            <h2>{{ project.title }}</h2>
+            <h3>{{ project.title }}</h3>
             <p>{{ project.description }}</p>
             <div class="project-tags">
-              <span 
-                v-for="(tag, tagIndex) in project.tags" 
-                :key="tagIndex"
-                class="tag"
-              >
-                {{ tag }}
-              </span>
+              <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
             </div>
             <div class="project-links">
-              <a 
-                v-for="(link, linkIndex) in project.links" 
-                :key="linkIndex"
+              <a
+                v-for="link in project.links"
+                :key="link.type"
                 :href="link.url"
-                :class="['project-link', link.type]"
                 target="_blank"
+                rel="noopener noreferrer"
+                class="link-button"
               >
                 {{ link.text }}
               </a>
             </div>
           </div>
-        </article>
+        </div>
       </div>
     </section>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAnimation } from '@/composables/useAnimation'
 import '@/assets/styles/animations.css'
-
-interface ProjectLink {
-  type: string
-  text: string
-  url: string
-}
-
-interface Project {
-  id: number
-  title: string
-  description: string
-  image: string
-  tags: string[]
-  links: ProjectLink[]
-}
+import { allProjects, allTags } from '@/data/projects'
+import type { Project } from '@/types/project'
 
 export default defineComponent({
   name: 'Projects',
   setup() {
     const { t } = useI18n()
     const { shouldAnimate } = useAnimation()
+    const selectedTags = ref<string[]>([])
+    const tags = ref<string[]>(allTags)
+    const projects = ref<Project[]>(allProjects)
 
-    return { t, shouldAnimate }
-  },
-  data() {
-    return {
-      selectedTags: [] as string[],
-      tags: ['Vue.js', 'TypeScript', 'Node.js', 'React', 'Python', 'Machine Learning'],
-      projects: [
-        {
-          id: 1,
-          title: 'E-Commerce Platform',
-          description: 'A full-stack e-commerce platform with Vue.js and Node.js',
-          image: 'https://picsum.photos/600/400',
-          tags: ['Vue.js', 'Node.js', 'TypeScript'],
-          links: [
-            { type: 'github', text: 'View Code', url: 'https://github.com/example/ecommerce' },
-            { type: 'demo', text: 'Live Demo', url: 'https://ecommerce-demo.com' }
-          ]
-        },
-        {
-          id: 2,
-          title: 'Task Management App',
-          description: 'A collaborative task management application with real-time updates',
-          image: 'https://picsum.photos/600/401',
-          tags: ['Vue.js', 'TypeScript', 'Firebase'],
-          links: [
-            { type: 'github', text: 'View Code', url: 'https://github.com/example/task-manager' },
-            { type: 'demo', text: 'Live Demo', url: 'https://task-manager-demo.com' }
-          ]
-        },
-        {
-          id: 3,
-          title: 'ML Image Classifier',
-          description: 'Machine learning model for image classification using Python',
-          image: 'https://picsum.photos/600/402',
-          tags: ['Python', 'Machine Learning', 'TensorFlow'],
-          links: [
-            { type: 'github', text: 'View Code', url: 'https://github.com/example/ml-classifier' }
-          ]
-        },
-        {
-          id: 4,
-          title: 'Portfolio Website',
-          description: 'Personal portfolio website built with Vue.js and TypeScript',
-          image: 'https://picsum.photos/600/403',
-          tags: ['Vue.js', 'TypeScript'],
-          links: [
-            { type: 'github', text: 'View Code', url: 'https://github.com/example/portfolio' },
-            { type: 'demo', text: 'Live Demo', url: 'https://portfolio-demo.com' }
-          ]
-        }
-      ] as Project[]
-    }
-  },
-  computed: {
-    filteredProjects(): Project[] {
-      if (this.selectedTags.length === 0) {
-        return this.projects
+    const filteredProjects = computed(() => {
+      if (selectedTags.value.length === 0) {
+        return projects.value
       }
-      return this.projects.filter(project =>
-        project.tags.some(tag => this.selectedTags.includes(tag))
+      return projects.value.filter((project: Project) =>
+        project.tags.some((tag: string) => selectedTags.value.includes(tag))
       )
-    }
-  },
-  methods: {
-    toggleTag(tag: string) {
-      const index = this.selectedTags.indexOf(tag)
+    })
+
+    const toggleTag = (tag: string) => {
+      const index = selectedTags.value.indexOf(tag)
       if (index === -1) {
-        this.selectedTags.push(tag)
+        selectedTags.value.push(tag)
       } else {
-        this.selectedTags.splice(index, 1)
+        selectedTags.value.splice(index, 1)
       }
+    }
+
+    return {
+      t,
+      shouldAnimate,
+      selectedTags,
+      tags,
+      projects,
+      filteredProjects,
+      toggleTag
     }
   }
 })
@@ -177,12 +116,6 @@ export default defineComponent({
 .projects-header h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.projects-header p {
-  font-size: 1.2rem;
   opacity: 0;
   transform: translateY(20px);
 }
@@ -227,7 +160,6 @@ export default defineComponent({
   box-shadow: var(--card-shadow);
   transition: all 0.3s ease;
   opacity: 0;
-  transform: translateY(30px);
 }
 
 .project-card:hover {
@@ -250,14 +182,14 @@ export default defineComponent({
   padding: 1.5rem;
 }
 
-.project-content h2 {
+.project-content h3 {
+  margin: 0 0 1rem 0;
   color: var(--text-color);
-  margin-bottom: 1rem;
 }
 
 .project-content p {
   color: var(--text-color);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   line-height: 1.6;
 }
 
@@ -265,15 +197,23 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .tag {
-  background: rgba(52, 152, 219, 0.1);
-  color: var(--accent-color);
   padding: 0.25rem 0.75rem;
+  background: rgba(52, 152, 219, 0.1);
+  border: 1px solid var(--accent-color);
   border-radius: 15px;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  color: var(--accent-color);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  background: var(--accent-color);
+  color: white;
 }
 
 .project-links {
@@ -281,81 +221,16 @@ export default defineComponent({
   gap: 1rem;
 }
 
-.project-link {
+.link-button {
   padding: 0.5rem 1rem;
-  border-radius: 4px;
+  background: var(--accent-color);
+  color: white;
+  border-radius: 5px;
   text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease;
 }
 
-.project-link.github {
-  background: #2c3e50;
-  color: white;
-}
-
-.project-link.demo {
-  background: #3498db;
-  color: white;
-}
-
-.project-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.8s ease forwards;
-}
-
-.animate-fade-in-delay {
-  animation: fadeIn 0.8s ease forwards;
-  animation-delay: 0.3s;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.6s ease forwards;
-}
-
-.animate-reset {
-  animation: none !important;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.animate-reset.animate-fade-in-delay {
-  transform: translateY(20px);
-}
-
-.animate-reset.animate-slide-up {
-  transform: translateY(30px);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
+.link-button:hover {
+  background: var(--accent-color-dark);
 }
 </style> 

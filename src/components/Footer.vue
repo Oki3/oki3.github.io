@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <p>&copy; {{ currentYear }} My Blog. All rights reserved.</p>
+    <p>&copy; {{ currentYear }} Weicheng Hu. All rights reserved.</p>
   </footer>
 </template>
 

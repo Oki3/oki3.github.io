@@ -4,10 +4,10 @@
       <div class="nav-brand">Casual & Code</div>
       <div class="nav-links">
         <router-link to="/" class="nav-link">{{ $t('nav.home') }}</router-link>
-        <router-link to="/posts" class="nav-link">{{ $t('nav.posts') }}</router-link>
-        <router-link to="/about" class="nav-link">{{ $t('nav.about') }}</router-link>
-        <router-link to="/toolkits" class="nav-link">{{ $t('nav.toolkits') }}</router-link>
         <router-link to="/projects" class="nav-link">{{ $t('nav.projects') }}</router-link>
+        <router-link to="/posts" class="nav-link">{{ $t('nav.posts') }}</router-link>
+        <router-link to="/toolkits" class="nav-link">{{ $t('nav.toolkits') }}</router-link>
+        <router-link to="/about" class="nav-link">{{ $t('nav.about') }}</router-link>
         <router-link to="/contact" class="nav-link">{{ $t('nav.contact') }}</router-link>
         <ThemeToggle />
         <LanguageSwitcher />
